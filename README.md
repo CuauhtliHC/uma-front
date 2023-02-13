@@ -16,8 +16,8 @@ Para inicializar el proyecto correr los siguientes comandos:
 
 
 Para iniciar el proyecto con docker:
-1.- docker build -t my-node-app .
-2.- docker run -p 3000:3000 my-node-app
+1.- docker build -t uma-front .
+2.- docker run -p 3000:3000 uma-front
 
 <-- -- -- -- -- -- -- -- -- -- -- -- -- -->
 
@@ -32,6 +32,11 @@ GitFlow Las ramas establecidas son:
 -Release: Ramas para la preparación de una nueva versión, donde se realizan pruebas y se asegura que la versión sea estable antes de ser publicada en la rama master.
 
 -Hotfix: Ramas para correcciones de errores críticos en la versión publicada en la rama master, que luego se integran en la rama master y develop.
+
+SemVer:
+X representa un cambio en la versión mayor, indicando un cambio no compatible con versiones anteriores.
+Y representa un cambio en la versión menor, indicando una nueva funcionalidad compatible con versiones anteriores.
+Z representa un cambio en la versión parche, indicando correcciones de errores compatibles con versiones anteriores.
 
                                                                         A TRABAJAR!!!
 
