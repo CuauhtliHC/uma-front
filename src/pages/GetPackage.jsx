@@ -5,9 +5,9 @@ import {
   IconButton,
   InputBase,
   Typography,
-} from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
-import React from "react";
+} from '@mui/material';
+import { Add, Remove } from '@mui/icons-material';
+import React from 'react';
 
 const GetPackage = () => {
   return (
@@ -21,28 +21,28 @@ const GetPackage = () => {
           <Box>
             <IconButton
               sx={{
-                border: "1px solid #B2BCCA",
-                filter: "drop-shadow(0px 2px 40px rgba(133, 133, 133, 0.08))",
-                borderRadius: "3px",
-                boxSizing: "border-box",
+                border: '1px solid #B2BCCA',
+                filter: 'drop-shadow(0px 2px 40px rgba(133, 133, 133, 0.08))',
+                borderRadius: '3px',
+                boxSizing: 'border-box',
               }}
             >
               <Remove />
             </IconButton>
             <InputBase
               inputProps={{
-                inputMode: "numeric",
-                sx: { textAlign: "center", fontWeight: 400 },
+                inputMode: 'numeric',
+                sx: { textAlign: 'center', fontWeight: 400 },
               }}
               value={1}
             />
           </Box>
           <IconButton
             sx={{
-              border: "1px solid #B2BCCA",
-              filter: "drop-shadow(0px 2px 40px rgba(133, 133, 133, 0.08))",
-              borderRadius: "3px",
-              boxSizing: "border-box",
+              border: '1px solid #B2BCCA',
+              filter: 'drop-shadow(0px 2px 40px rgba(133, 133, 133, 0.08))',
+              borderRadius: '3px',
+              boxSizing: 'border-box',
             }}
           >
             <Add />
@@ -50,8 +50,8 @@ const GetPackage = () => {
         </Box>
         <Button
           sx={{
-            border: "1px solid #000000",
-            borderRadius: "4px",
+            border: '1px solid #000000',
+            borderRadius: '4px',
           }}
           variant="contained"
           fullWidth
