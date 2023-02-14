@@ -1,6 +1,6 @@
-import React from "react";
-import { Routes, Route } from "react-router";
-import GetPackage from "../pages/GetPackage";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import GetPackage from '../pages/GetPackage.jsx';
 
 const Links = () => {
   return (
