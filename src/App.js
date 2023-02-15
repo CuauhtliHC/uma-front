@@ -1,17 +1,24 @@
-import { Container } from '@mui/material';
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Navbar from './components/Navbar.jsx';
-import Links from './routes/routes.jsx';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Container sx={{ mt: '66px', padding: 0 }}>
-        <Links />
-      </Container>
-    </BrowserRouter>
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
