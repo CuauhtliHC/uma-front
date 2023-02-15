@@ -1,63 +1,64 @@
 import {
-  Box,
-  Button,
-  Checkbox,
-  IconButton,
-  InputBase,
-  Typography,
+  Box, Button, IconButton, Typography,
 } from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
-import React from 'react';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AddPackage from '../commons/AddPackage.jsx';
 
 const GetPackage = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    setData([
+      { direction: 'San Eugenio 2222', maxQuantity: 2 },
+      { direction: 'San Eugenio 2222', maxQuantity: 4 },
+    ]);
+  }, []);
+  const backToViewStart = () => {
+    navigate('/iniciar_jornada');
+  };
+  const startJornada = () => {
+    navigate('/iniciar_jornada');
+  };
   return (
     <>
       <Box>
-        <Typography>Obtener paquetes</Typography>
-        <Typography>¿Cuantos paquetes más vas a repartir hoy?</Typography>
-        <Box>
-          <Checkbox />
-          <Typography>Direccion</Typography>
+        <IconButton onClick={backToViewStart} sx={{ padding: 0 }}>
+          <ArrowBackIosNewIcon sx={{ width: '26px', height: '26px' }}/>
+        </IconButton>
+        <Box marginTop="38px">
+          <Typography fontWeight={700} fontSize="16px">
+            Obtener paquetes
+          </Typography>
+          <Typography fontWeight={400} fontSize="12px">¿Cuantos paquetes más vas a repartir hoy?</Typography>
           <Box>
-            <IconButton
-              sx={{
-                border: '1px solid #B2BCCA',
-                filter: 'drop-shadow(0px 2px 40px rgba(133, 133, 133, 0.08))',
-                borderRadius: '3px',
-                boxSizing: 'border-box',
-              }}
-            >
-              <Remove />
-            </IconButton>
-            <InputBase
-              inputProps={{
-                inputMode: 'numeric',
-                sx: { textAlign: 'center', fontWeight: 400 },
-              }}
-              value={1}
-            />
+            {data
+              ? data.map((dataPackage, i) => {
+                return <AddPackage key={i} dataPackage={dataPackage} />;
+              })
+              : null}
           </Box>
-          <IconButton
+          <Button
             sx={{
-              border: '1px solid #B2BCCA',
-              filter: 'drop-shadow(0px 2px 40px rgba(133, 133, 133, 0.08))',
-              borderRadius: '3px',
-              boxSizing: 'border-box',
+              border: '1px solid #000000',
+              borderRadius: '4px',
+              marginTop: '50px',
             }}
+            variant="contained"
+            fullWidth
+            onClick={startJornada}
           >
-            <Add />
-          </IconButton>
+            <Typography
+              color="white"
+              fontStyle="normal"
+              fontWeight={500}
+              fontSize="15px"
+            >
+              INICIAR JORNADA
+            </Typography>
+          </Button>
         </Box>
-        <Button
-          sx={{
-            border: '1px solid #000000',
-            borderRadius: '4px',
-          }}
-          variant="contained"
-          fullWidth
-        >
-          <Typography color="white">INICIAR JORNADA</Typography>
-        </Button>
       </Box>
     </>
   );
