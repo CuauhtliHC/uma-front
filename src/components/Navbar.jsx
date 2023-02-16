@@ -30,9 +30,8 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <Box
             justifyContent="space-between"
-            container
             sx={{ width: '100%', display: 'flex' }}>
-            <Box item>
+            <Box>
               <Box
                 component="img"
                 sx={{
@@ -43,7 +42,7 @@ const Navbar = () => {
                 src={logoFD}
               />
             </Box>
-            <Box item>
+            <Box>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
