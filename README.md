@@ -2,7 +2,7 @@
 |    Bienvenido a FastDelivery   |   
 <-------------------------------->
 
-Equipo de Desarrollo Logismatica: 
+Equipo de Desarrollo Logismática: 
 
 ° Cuauhtli Herrera;
 ° Gisela Arroyo Galarce;
