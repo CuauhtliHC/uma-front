@@ -11,8 +11,14 @@ const GetPackage = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
     setData([
-      { direction: 'San Eugenio 2222', maxQuantity: 2 },
-      { direction: 'San Eugenio 2222', maxQuantity: 4 },
+      { id: 1, direction: 'San Eugenio 2222', maxQuantity: 2 },
+      { id: 2, direction: 'San Eugenio 2222', maxQuantity: 10 },
+      { id: 3, direction: 'San Eugenio 2222', maxQuantity: 2 },
+      { id: 4, direction: 'San Eugenio 2222', maxQuantity: 10 },
+      { id: 5, direction: 'San Eugenio 2222', maxQuantity: 2 },
+      { id: 6, direction: 'San Eugenio 2222', maxQuantity: 10 },
+      { id: 7, direction: 'San Eugenio 2222', maxQuantity: 2 },
+      { id: 8, direction: 'San Eugenio 2222', maxQuantity: 10 },
     ]);
   }, []);
   const backToViewStart = () => {
@@ -35,7 +41,11 @@ const GetPackage = () => {
           <Box>
             {data
               ? data.map((dataPackage, i) => {
-                return <AddPackage key={i} dataPackage={dataPackage} />;
+                return <AddPackage
+                key={i}
+                id={dataPackage.id}
+                direction={dataPackage.direction}
+                maxQuantity={dataPackage.maxQuantity} />;
               })
               : null}
           </Box>
