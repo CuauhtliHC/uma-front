@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   FormControl,
   InputLabel,
@@ -7,8 +7,37 @@ import {
   Button,
   Grid,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const LoginForm = ({ data, setData }) => {
+const LoginForm = () => {
+  const [errors, setErrors] = useState({});
+  const [data, setData] = useState({
+    email: '',
+    password: '',
+  });
+
+  const validate = (dato) => {
+    const errores = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar un correo electrónico
+    if (!dato.email) {
+      errores.email = 'El campo Email es obligatorio';
+    } else if (!emailRegex.test(dato.email)) {
+      errores.email = 'El campo Email no es válido';
+    }
+
+    if (!dato.password) {
+      errores.password = 'El campo Contraseña es obligatorio';
+    }
+    return errores;
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const VerificateForm = validate(data);
+    setErrors(VerificateForm);
+    if (Object.keys(VerificateForm).length === 0) {
+      // Aca van las acciones reales para loguearse.
+    }
+  };
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -24,7 +53,11 @@ const LoginForm = ({ data, setData }) => {
             onChange={(e) => setData({ ...data, email: e.target.value })}
             required
           />
-          <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
+          {errors.email ? (
+            <FormHelperText error>{errors.email}</FormHelperText>
+          ) : (
+            <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
+          )}
         </FormControl>
       </Grid>
       <Grid item xs={12}>
@@ -40,13 +73,17 @@ const LoginForm = ({ data, setData }) => {
             onChange={(e) => setData({ ...data, password: e.target.value })}
             required
           />
-          <FormHelperText id="password-helper">
-            Ingresa tu Contraseña
-          </FormHelperText>
+          {errors.password ? (
+            <FormHelperText error>{errors.password}</FormHelperText>
+          ) : (
+            <FormHelperText id="password-helper">
+              Ingresa tu Contraseña
+            </FormHelperText>
+          )}
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" fullWidth={true}>
+        <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
           Ingresar
         </Button>
         <Button
@@ -54,9 +91,11 @@ const LoginForm = ({ data, setData }) => {
           style={{ fontWeight: '300', textTransform: 'none' }}>
           Recuperar Contraseña
         </Button>
-        <Button fullWidth={true} style={{ textTransform: 'none' }}>
-          Registrarse
-        </Button>
+        <Link to={'/register'} style={{ textDecoration: 'none' }}>
+          <Button fullWidth={true} style={{ textTransform: 'none' }}>
+            Registrarse
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   );
