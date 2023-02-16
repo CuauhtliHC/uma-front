@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Avatar, Box, Grid, Typography, Button,
 } from '@mui/material';
-import avatarImg from '../statics/images/avatar.png';
+import usuariosFake from '../statics/DummyData/usuariosFake';
 
 const Profile = () => {
   return (
@@ -17,7 +17,7 @@ const Profile = () => {
         <Grid item>
           <Avatar
             alt="foto de perfil"
-            src={avatarImg}
+            src={usuariosFake[1].fotoPerfil}
             sx={{ width: 150, height: 150 }}
           />
         </Grid>
@@ -30,20 +30,29 @@ const Profile = () => {
         spacing={2}
         direction="column">
         <Grid item xs={12}>
-        <Typography> Juan Perez</Typography>
+          <Typography> {usuariosFake[0].nombre}</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography> Balcarce 50, CABA</Typography>
+          <Typography>{usuariosFake[0].email}</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography> Ya hiciste 36 repartos</Typography>
+          <Typography>{usuariosFake[0].direccion}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography>
+            Ya hiciste {usuariosFake[0].totalPaquetesEntregados} repartos
+          </Typography>
         </Grid>
       </Grid>
       <Box style={{ margin: '2%', marginTop: '10%' }}>
-        <Button variant="contained" fullWidth >
+        <Button variant="contained" fullWidth>
           EDITAR PERFIL
         </Button>
-        <Button variant="contained" color= "error" fullWidth style={{ marginTop: '5%' }}>
+        <Button
+          variant="contained"
+          color="error"
+          fullWidth
+          style={{ marginTop: '5%' }}>
           ELIMINAR USUARIO
         </Button>
       </Box>
