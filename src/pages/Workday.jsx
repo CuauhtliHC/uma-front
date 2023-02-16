@@ -6,6 +6,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
+  Box,
 } from '@mui/material';
 import '../statics/styles/workday.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -34,7 +35,7 @@ const Workday = () => {
   ];
 
   return (
-    <div className="divMasterWorkday">
+    <Box className="divMasterWorkday">
       <Button variant="contained" fullWidth>
         OBTENER PAQUETES
       </Button>
@@ -90,7 +91,7 @@ const Workday = () => {
           )}
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Box>
   );
 };
 
