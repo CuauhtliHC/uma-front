@@ -11,10 +11,15 @@ const Register = () => {
   console.log(data);
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '12vh',
+        }}>
         <img src={Logo} alt="logo" width={'50%'} height={'50%'} />
       </div>
-      <RegisterForm data={data} setData={setData} />;
+      <RegisterForm data={data} setData={setData} />
     </>
   );
 };

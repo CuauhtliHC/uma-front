@@ -4,6 +4,7 @@ import GetPackage from '../pages/GetPackage.jsx';
 import Workday from '../pages/Workday.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
+import Profile from '../pages/Profile.jsx';
 
 const Links = () => {
   return (
@@ -12,6 +13,7 @@ const Links = () => {
       <Route exact path="/iniciar_jornada" element={<Workday />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/register" element={<Register />} />
+      <Route exact path="/mi_perfil" element={<Profile />} />
     </Routes>
   );
 };

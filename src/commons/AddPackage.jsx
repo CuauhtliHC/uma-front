@@ -6,17 +6,52 @@ import {
   Typography,
 } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { listPackage } from '../state/addingPackage.jsx';
 
-const AddPackage = ({ dataPackage }) => {
+const AddPackage = ({ id, direction, maxQuantity }) => {
   const [quantity, setQuantity] = useState(1);
-  const removePackage = () => {
+  const [checked, setChecked] = useState(false);
+  const [listPackages, setListPackages] = useRecoilState(listPackage);
+
+  const removeQuantity = () => {
     setQuantity(quantity - 1);
+    if (checked && listPackages.list.find((pkg) => pkg.id === id)) {
+      setListPackages((packages) => {
+        const list = packages.list.map((pkg) => (pkg.id === id ? { id, quantity } : pkg));
+        return { total: packages.total - 1, list };
+      });
+    }
   };
 
-  const addPackage = () => {
+  const addQuantity = () => {
     setQuantity(quantity + 1);
+    if (checked && listPackages.list.find((pkg) => pkg.id === id)) {
+      setListPackages((packages) => {
+        const list = packages.list.map((pkg) => (pkg.id === id ? { id, quantity } : pkg));
+        return { total: packages.total + 1, list };
+      });
+    }
   };
+
+  const handleCheckboxChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+  useEffect(() => {
+    if (checked && !listPackages.list.find((pkg) => pkg.id === id)) {
+      setListPackages((packages) => {
+        return { total: packages.total + quantity, list: [...packages.list, { id, quantity }] };
+      });
+    } else if (!checked && listPackages.list.find((pkg) => pkg.id === id)) {
+      setListPackages((packages) => {
+        return {
+          total: packages.total - quantity, list: packages?.list.filter((pkg) => pkg.id !== id),
+        };
+      });
+    }
+  }, [quantity, checked]);
 
   return (
     <Box
@@ -25,10 +60,14 @@ const AddPackage = ({ dataPackage }) => {
       boxShadow="0 2px 2px -1px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.14)"
     >
       <Typography textAlign="center" fontWeight={400} fontSize="12px">
-        {dataPackage.direction}
+        {direction}
       </Typography>
       <Box>
-        <Checkbox />
+        <Checkbox
+        checked={checked}
+        onChange={handleCheckboxChange}
+        disabled={!checked && listPackages.total === 10}
+        />
         <IconButton
           sx={{
             border: '1px solid #B2BCCA',
@@ -38,7 +77,7 @@ const AddPackage = ({ dataPackage }) => {
             width: '29px',
             height: '29px',
           }}
-          onClick={removePackage}
+          onClick={removeQuantity}
           disabled={quantity === 1}
         >
           <Remove />
@@ -70,8 +109,8 @@ const AddPackage = ({ dataPackage }) => {
             width: '29px',
             height: '29px',
           }}
-          onClick={addPackage}
-          disabled={quantity === dataPackage.maxQuantity}
+          onClick={addQuantity}
+          disabled={quantity === maxQuantity || listPackages.total === 10}
         >
           <Add />
         </IconButton>

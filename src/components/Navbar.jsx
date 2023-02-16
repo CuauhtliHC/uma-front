@@ -3,7 +3,7 @@ import {
   Avatar,
   Box,
   Container,
-  Grid,
+  // Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -12,6 +12,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+import avatarImg from '../statics/images/avatar.png';
+import logoFD from '../statics/images/logoFastDelivery.jpeg';
 
 const Navbar = () => {
   const settings = ['Perfil', 'Cerrar Sesion'];
@@ -26,22 +28,29 @@ const Navbar = () => {
     <AppBar sx={{ backgroundColor: 'white' }}>
       <Container>
         <Toolbar disableGutters>
-          <Grid justify="space-between" container spacing={34}>
-            <Grid item>
+          <Box
+            justifyContent="space-between"
+            container
+            sx={{ width: '100%', display: 'flex' }}>
+            <Box item>
               <Box
                 component="img"
                 sx={{
-                  height: 30,
-                  width: 30,
+                  width: '50px',
+                  height: 'auto',
                 }}
                 alt="Logo"
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+                src={logoFD}
               />
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box item>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{ width: '30px', height: '30px' }}/>
+                  <Avatar
+                    alt="foto de perfil"
+                    src={avatarImg}
+                    sx={{ width: '35px', height: '35px' }}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -58,16 +67,15 @@ const Navbar = () => {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
+                onClose={handleCloseUserMenu}>
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>

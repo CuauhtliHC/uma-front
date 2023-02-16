@@ -1,40 +1,22 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import {
   Button,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Typography,
+  Box,
 } from '@mui/material';
 import '../statics/styles/workday.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+// eslint-disable-next-line import/no-named-as-default
 import Card from '../components/Card.jsx';
+import usuariosFake from '../statics/DummyData/usuariosFake';
 
 const Workday = () => {
-  const totalPaquetesRepartidos = 6;
-  const totalPaquetesPendientes = 2;
-
-  const paquetesPendientes = [
-    { direccion: 'Mendoza 1810, CABA', estado: 'En viaje' },
-    {
-      direccion: 'Miguel de Azcuenaga 826, Vicente Lopez',
-      estado: 'Pendiente',
-    },
-    { direccion: 'Ramallo 2186, CABA ', estado: 'Pendiente' },
-  ];
-
-  const paquetesRepartidos = [
-    { direccion: 'Amenabar 2356, CABA', estado: 'Entregado' },
-    { direccion: 'Av Cerviño 3620, CABA', estado: 'Entregado' },
-    { direccion: 'Juncal 2110, CABA', estado: 'Cancelado' },
-    { direccion: 'Av. Carabobo y Rivadavia, CABA', estado: 'Entregado' },
-    { direccion: 'Rosario 623, CABA', estado: 'Entregado' },
-    { direccion: 'Santa Fe 4567', estado: 'Entregado' },
-  ];
-
   return (
-    <div className="divMasterWorkday">
+    <Box className="divMasterWorkday">
       <Button variant="contained" fullWidth>
         OBTENER PAQUETES
       </Button>
@@ -47,13 +29,24 @@ const Workday = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography variant="body2" gutterBottom>
-            Tenes {totalPaquetesPendientes} paquetes pendientes
+            Tenes {usuariosFake[0].totalPaquetesPendientes} paquetes pendientes
           </Typography>
-          {paquetesPendientes[0] ? (
-            paquetesPendientes.map((data, i) => {
+          {usuariosFake[0].paquetesPendientes[0] ? (
+            usuariosFake[0].paquetesPendientes.map((data, i) => {
               return (
                 <div className="column is-2" key={i}>
-                  <Card direccion={data.direccion} estado={data.estado} />
+                  <Link
+                    to={`/obtener_paquete/${data.id}`}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}>
+                    <Card
+                      direccion={data.direccion}
+                      estado={data.estado}
+                      id={data.id}
+                    />
+                  </Link>
                 </div>
               );
             })
@@ -73,10 +66,10 @@ const Workday = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography variant="body2" gutterBottom>
-            Ya repartiste {totalPaquetesRepartidos} paquetes
+            Ya repartiste {usuariosFake[0].totalPaquetesEntregados} paquetes
           </Typography>
-          {paquetesRepartidos[0] ? (
-            paquetesRepartidos.map((data, i) => {
+          {usuariosFake[0].paquetesEntregados[0] ? (
+            usuariosFake[0].paquetesEntregados.map((data, i) => {
               return (
                 <div className="column is-2" key={i}>
                   <Card direccion={data.direccion} estado={data.estado} />
@@ -90,7 +83,7 @@ const Workday = () => {
           )}
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Box>
   );
 };
 

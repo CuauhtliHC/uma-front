@@ -21,8 +21,8 @@ const LoginForm = ({ data, setData }) => {
           <Input
             id="email"
             type="email"
-            aria-aria-describedby="email-helper"
             onChange={(e) => setData({ ...data, email: e.target.value })}
+            required
           />
           <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
         </FormControl>
@@ -37,8 +37,8 @@ const LoginForm = ({ data, setData }) => {
           <Input
             id="pwd"
             type="password"
-            aria-aria-describedby="password-helper"
             onChange={(e) => setData({ ...data, password: e.target.value })}
+            required
           />
           <FormHelperText id="password-helper">
             Ingresa tu Contraseña
