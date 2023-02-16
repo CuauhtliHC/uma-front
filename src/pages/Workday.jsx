@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import {
   Button,
   Accordion,
@@ -35,7 +35,18 @@ const Workday = () => {
             usuariosFake[0].paquetesPendientes.map((data, i) => {
               return (
                 <div className="column is-2" key={i}>
-                  <Card direccion={data.direccion} estado={data.estado} id={data.id} />
+                  <Link
+                    to={`/obtener_paquete/${data.id}`}
+                    style={{
+                      textDecoration: 'none',
+                      color: 'black',
+                    }}>
+                    <Card
+                      direccion={data.direccion}
+                      estado={data.estado}
+                      id={data.id}
+                    />
+                  </Link>
                 </div>
               );
             })
