@@ -3,7 +3,7 @@ import {
   Avatar,
   Box,
   Container,
-  Grid,
+  // Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -28,19 +28,22 @@ const Navbar = () => {
     <AppBar sx={{ backgroundColor: 'white' }}>
       <Container>
         <Toolbar disableGutters>
-          <Grid justify="space-between" container spacing={34}>
-            <Grid item>
+          <Box
+            justifyContent="space-between"
+            container
+            sx={{ width: '100%', display: 'flex' }}>
+            <Box item>
               <Box
                 component="img"
                 sx={{
-                  width: '30px',
+                  width: '50px',
                   height: 'auto',
                 }}
                 alt="Logo"
                 src={logoFD}
               />
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box item>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
@@ -71,8 +74,8 @@ const Navbar = () => {
                   </MenuItem>
                 ))}
               </Menu>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
