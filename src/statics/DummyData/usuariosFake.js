@@ -10,20 +10,25 @@ const usuariosFake = [
     fotoPerfil:
       'https://media.tycsports.com/files/2022/06/14/440404/las-20-mejores-fotos-de-perfil-para-tu-cuenta-de-free-fire_w416.webp',
     paquetesPendientes: [
-      { direccion: 'Mendoza 1810, CABA', estado: 'En viaje' },
+      { direccion: 'Mendoza 1810, CABA', estado: 'En viaje', id: 2833 },
       {
         direccion: 'Miguel de Azcuenaga 826, Vicente Lopez',
         estado: 'Pendiente',
+        id: 2830,
       },
-      { direccion: 'Ramallo 2186, CABA ', estado: 'Pendiente' },
+      { direccion: 'Ramallo 2186, CABA ', estado: 'Pendiente', id: 2827 },
     ],
     paquetesEntregados: [
-      { direccion: 'Amenabar 2356, CABA', estado: 'Entregado' },
-      { direccion: 'Av Cerviño 3620, CABA', estado: 'Entregado' },
-      { direccion: 'Juncal 2110, CABA', estado: 'Cancelado' },
-      { direccion: 'Av. Carabobo y Rivadavia, CABA', estado: 'Entregado' },
-      { direccion: 'Rosario 623, CABA', estado: 'Entregado' },
-      { direccion: 'Santa Fe 4567', estado: 'Entregado' },
+      { direccion: 'Amenabar 2356, CABA', estado: 'Entregado', id: 2670 },
+      { direccion: 'Av Cerviño 3620, CABA', estado: 'Entregado', id: 2500 },
+      { direccion: 'Juncal 2110, CABA', estado: 'Cancelado', id: 2643 },
+      {
+        direccion: 'Av. Carabobo y Rivadavia, CABA',
+        estado: 'Entregado',
+        id: 2799,
+      },
+      { direccion: 'Rosario 623, CABA', estado: 'Entregado', id: 2755 },
+      { direccion: 'Santa Fe 4567', estado: 'Entregado', id: 2265 },
     ],
     totalPaquetesPendientes: 3,
     totalPaquetesEntregados: 6,
