@@ -1,8 +1,5 @@
 import React from 'react';
 import {
-  // List,
-  // ListItem,
-  // ListItemText,
   Divider,
   Grid,
   Typography,
@@ -44,7 +41,6 @@ const Card = ({ direccion, estado }) => {
           xs={8}
           container
           spacing={1}
-          // style={{ alignItems: 'center' }}
         >
           <Grid item xs>
             <Typography variant="body2" gutterBottom>
@@ -71,80 +67,6 @@ const Card = ({ direccion, estado }) => {
         </Grid>
       </Grid>
       <Divider variant="inset" style={{ marginTop: '3%' }} />
-
-      {/* <List
-        sx={{
-          width: '100%',
-          maxWidth: 360,
-          bgcolor: 'background.paper',
-        }}>
-        <ListItem>
-          <img
-            src={yellowBox}
-            alt="Reparto en curso"
-            style={{ width: '60px' }}
-          />
-
-          <Typography fontSize={'13px'}>{direccion}</Typography>
-          <Typography variant="subtitle2" fontSize={'14px'} align="rigth">
-            {estado}
-          </Typography>
-        </ListItem>
-
-        <Divider variant="inset" component="li" /> */}
-
-      {/* <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Avatar with text and icon
-          </Typography>
-          <Demo>
-            <List >
-              {generate(
-                <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={secondary ? 'Secondary text' : null}
-                  />
-                </ListItem>,
-              )}
-            </List>
-          </Demo>
-        </Grid> */}
-
-      {/* <ListItem>
-          <img
-            src={greenBox}
-            alt="Reparto entregado"
-            style={{ width: '60px' }}
-          />
-
-          <ListItemText secondary="Amenabar 2356, CABA" />
-          <p>Entregado</p>
-        </ListItem> */}
-      {/* <Divider variant="inset" component="li" />
-        <ListItem>
-          <img
-            src={greenBox}
-            alt="Reparto entregado"
-            style={{ width: '60px', height: 'auto' }}
-          />
-
-          <ListItemText secondary="Av Cerviño 3620, CABA" />
-          <p>Entregado</p>
-        </ListItem> */}
-      {/* <Divider variant="inset" component="li" /> */}
-      {/* </List> */}
     </Box>
   );
 };
