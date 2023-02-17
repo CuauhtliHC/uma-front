@@ -6,7 +6,7 @@ import Logo from '../statics/images/logo.svg';
 const Register = () => {
   return (
     <>
-      <Box display="flex" justifyContent="center" marginBottom="12vh">
+      <Box display="flex" justifyContent="center" marginBottom="4vh">
         <Box component="img" width="50%" height="50%" alt="Logo" src={Logo} />
       </Box>
       <RegisterForm />
