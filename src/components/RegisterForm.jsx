@@ -9,13 +9,14 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
+import usuariosFake from '../statics/DummyData/usuariosFake';
 
 const RegisterForm = () => {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState(null);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  const dataEmails = ['cuau_daali@hotmail.com'];
+  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
   const [password, setPassword] = useState(null);

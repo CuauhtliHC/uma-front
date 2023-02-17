@@ -9,11 +9,12 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
+import usuariosFake from '../statics/DummyData/usuariosFake';
 
 const RestoreForm = () => {
   const [email, setEmail] = useState(null);
   const [errors, setErrors] = useState({});
-  const dataEmails = ['cuau_daali@hotmail.com'];
+  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
