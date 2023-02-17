@@ -7,50 +7,83 @@ import {
   Button,
   Grid,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import AlertMessage from '../commons/AlertMessage.jsx';
+import { user } from '../state/user.jsx';
+import { saveState } from '../utils/browserStorage.jsx';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(user);
   const [errors, setErrors] = useState({});
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-  });
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const dataEmails = ['cuau_daali@hotmail.com'];
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const validate = (dato) => {
+  const validate = () => {
     const errores = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar un correo electrónico
-    if (!dato.email) {
+    if (!email || email === '') {
       errores.email = 'El campo Email es obligatorio';
-    } else if (!emailRegex.test(dato.email)) {
+    } else if (!emailRegex.test(email)) {
       errores.email = 'El campo Email no es válido';
     }
 
-    if (!dato.password) {
+    if (!password || password === '') {
       errores.password = 'El campo Contraseña es obligatorio';
     }
     return errores;
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const VerificateForm = validate(data);
+    const VerificateForm = validate();
     setErrors(VerificateForm);
-    if (Object.keys(VerificateForm).length === 0) {
-      // Aca van las acciones reales para loguearse.
+    if (
+      !dataEmails.find((element) => element === email)
+      && Object.keys(VerificateForm).length === 0
+    ) {
+      setOpen(false);
+      setMessage({
+        description: 'Esta mail no se encuentra registrado',
+        title: 'Error',
+        status: 'error',
+      });
+      setOpen(true);
+    } else if (
+      emailRegex.test(email)
+      && Object.keys(VerificateForm).length === 0 && password === 'Plataforma5@'
+    ) {
+      setUser({ id: 1, email: 'cuau_daali@hotmail.com', isAdmin: false });
+      saveState({ id: 1, email: 'cuau_daali@hotmail.com', isAdmin: false });
+      navigate('/iniciar_jornada');
+    } else if (dataEmails.find((element) => element === email) && Object.keys(VerificateForm).length === 0 && password !== 'Plataforma5@') {
+      setOpen(false);
+      setMessage({
+        description: 'Contraseña incorrecta',
+        title: 'Error',
+        status: 'error',
+      });
+      setOpen(true);
     }
   };
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
+        <AlertMessage open={open} message={message} setOpen={setOpen} />
         <FormControl fullWidth={true}>
           <InputLabel
             htmlFor="email"
-            style={{ fontSize: '17px', color: '#FEBC14' }}>
+            style={{ fontSize: '17px', color: '#FEBC14' }}
+          >
             Usuario
           </InputLabel>
           <Input
             id="email"
             type="email"
-            onChange={(e) => setData({ ...data, email: e.target.value })}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           {errors.email ? (
@@ -64,13 +97,14 @@ const LoginForm = () => {
         <FormControl fullWidth={true}>
           <InputLabel
             htmlFor="pwd"
-            style={{ fontSize: '17px', color: '#FEBC14' }}>
+            style={{ fontSize: '17px', color: '#FEBC14' }}
+          >
             Contraseña
           </InputLabel>
           <Input
             id="pwd"
             type="password"
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           {errors.password ? (
@@ -86,11 +120,14 @@ const LoginForm = () => {
         <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
           Ingresar
         </Button>
-        <Button
-          fullWidth={true}
-          style={{ fontWeight: '300', textTransform: 'none' }}>
-          Recuperar Contraseña
-        </Button>
+        <Link to={'/recuperar_contraseña'} style={{ textDecoration: 'none' }}>
+          <Button
+            fullWidth={true}
+            style={{ fontWeight: '300', textTransform: 'none' }}
+          >
+            Recuperar Contraseña
+          </Button>
+        </Link>
         <Link to={'/register'} style={{ textDecoration: 'none' }}>
           <Button fullWidth={true} style={{ textTransform: 'none' }}>
             Registrarse
