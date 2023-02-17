@@ -12,6 +12,7 @@ import { useSetRecoilState } from 'recoil';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import { user } from '../state/user.jsx';
 import { saveState } from '../utils/browserStorage.jsx';
+import usuariosFake from '../statics/DummyData/usuariosFake';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const dataEmails = ['cuau_daali@hotmail.com'];
+  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

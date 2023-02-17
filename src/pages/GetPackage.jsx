@@ -5,21 +5,13 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddPackage from '../commons/AddPackage.jsx';
+import packageFake from '../statics/DummyData/packagesFake';
 
 const GetPackage = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   useEffect(() => {
-    setData([
-      { id: 1, direction: 'San Eugenio 2222', maxQuantity: 2 },
-      { id: 2, direction: 'San Eugenio 2222', maxQuantity: 10 },
-      { id: 3, direction: 'San Eugenio 2222', maxQuantity: 2 },
-      { id: 4, direction: 'San Eugenio 2222', maxQuantity: 10 },
-      { id: 5, direction: 'San Eugenio 2222', maxQuantity: 2 },
-      { id: 6, direction: 'San Eugenio 2222', maxQuantity: 10 },
-      { id: 7, direction: 'San Eugenio 2222', maxQuantity: 2 },
-      { id: 8, direction: 'San Eugenio 2222', maxQuantity: 10 },
-    ]);
+    setData(packageFake);
   }, []);
   const backToViewStart = () => {
     navigate('/iniciar_jornada');

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Button,
   Accordion,
@@ -10,14 +10,17 @@ import {
 } from '@mui/material';
 import '../statics/styles/workday.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// eslint-disable-next-line import/no-named-as-default
 import Card from '../components/Card.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
 
 const Workday = () => {
+  const navigate = useNavigate();
+  const toGetPackage = () => {
+    navigate('/obtener_paquete');
+  };
   return (
     <Box className="divMasterWorkday">
-      <Button variant="contained" fullWidth>
+      <Button variant="contained" fullWidth onClick={toGetPackage}>
         OBTENER PAQUETES
       </Button>
       <Accordion className="accordionWorkday">
