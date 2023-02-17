@@ -22,6 +22,7 @@ const Links = () => {
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />
         <Route exact path="/iniciar_jornada" element={<Workday />} />
+        <Route exact path="/obtener_paquete/:id" element={<></>} />
       </Route>
       <Route element={<LoggedRestricted user={dataUser} />}>
         <Route exact path="/login" element={<Login />} />
