@@ -12,6 +12,7 @@ import RestorePassword from '../pages/RestorePassword.jsx';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import { user } from '../state/user.jsx';
 import LoggedRestricted from './LoggedRestricted.jsx';
+import CurrentDistribution from '../pages/CurrentDistribution/CurrentDistribution.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -22,7 +23,7 @@ const Links = () => {
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />
         <Route exact path="/iniciar_jornada" element={<Workday />} />
-        <Route exact path="/obtener_paquete/:id" element={<></>} />
+        <Route exact path="/obtener_paquete/:id" element={<CurrentDistribution/>} />
       </Route>
       <Route element={<LoggedRestricted user={dataUser} />}>
         <Route exact path="/login" element={<Login />} />
