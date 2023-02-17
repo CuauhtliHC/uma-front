@@ -1,10 +1,6 @@
 import React from 'react';
 import {
-  Divider,
-  Grid,
-  Typography,
-  Box,
-  IconButton,
+  Divider, Grid, Typography, Box, IconButton,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -36,32 +32,24 @@ const Card = ({ direccion, estado }) => {
         <Grid item style={{ alignItems: 'center' }}>
           <img src={boxImg} alt="Reparto en curso" style={{ width: '70px' }} />
         </Grid>
-        <Grid
-          item
-          xs={8}
-          container
-          spacing={1}
-        >
+        <Grid item xs={8} container spacing={1}>
           <Grid item xs>
             <Typography variant="body2" gutterBottom>
               {direccion}
             </Typography>
           </Grid>
-          <Grid
-            xs={4}
-            container
-            direction="column"
-            spacing={2}
-            justify="flex-end">
-            <Grid item style={{ textAlign: 'right' }}>
-              <IconButton edge="end" aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <Typography gutterBottom variant="subtitle2" component="div">
-                {estado}
-              </Typography>
+          <Grid item xs={4}>
+            <Grid container direction="column" spacing={2} justify="flex-end">
+              <Grid item style={{ textAlign: 'right' }}>
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <Typography gutterBottom variant="subtitle2" component="div">
+                  {estado}
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
