@@ -99,7 +99,6 @@ const RegisterForm = () => {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <AlertMessage open={open} message={message} setOpen={setOpen} />
         <FormControl fullWidth={true}>
           <InputLabel
             htmlFor="userName"

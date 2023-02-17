@@ -4,7 +4,7 @@ const usuariosFake = [
   {
     id: 1,
     email: 'juanperez@mail.com',
-    contraseña: '1234clave',
+    contraseña: 'Plataforma5@',
     nombre: 'Juan Perez',
     direccion: 'Balcarce 50, CABA',
     fotoPerfil:
@@ -36,7 +36,7 @@ const usuariosFake = [
   {
     id: 2,
     email: 'MariaGarcia@mail.com',
-    contraseña: '1234clave',
+    contraseña: 'Plataforma5@',
     nombre: 'Maria Garcia',
     direccion: 'Juan B. Justo 1456, CABA',
     fotoPerfil: avatarImg,
