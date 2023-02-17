@@ -1,9 +1,19 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import { useRecoilValue } from 'recoil';
 import RestoreForm from '../components/RestoreForm.jsx';
+import { user } from '../state/user.jsx';
 import Logo from '../statics/images/logo.svg';
 
 const RestorePassword = () => {
+  const dataUser = useRecoilValue(user);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (dataUser) {
+      navigate('/iniciar_jornada');
+    }
+  }, []);
   return (
     <>
       <Box display="flex" justifyContent="center" marginBottom="12vh">

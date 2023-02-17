@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   Container,
-  // Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -12,17 +11,32 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useSetRecoilState } from 'recoil';
+import { user } from '../state/user.jsx';
 import avatarImg from '../statics/images/avatar.png';
 import logoFD from '../statics/images/logoFastDelivery.jpeg';
 
 const Navbar = () => {
-  const settings = ['Perfil', 'Cerrar Sesion'];
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(user);
+  const settings = [
+    { name: 'Perfil', link: '/mi_perfil' },
+    { name: 'Cerrar Sesion', link: '/logout' },
+  ];
   const [anchorElUser, setAnchorElUser] = useState(null);
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+    if (setting.name === 'Cerrar Sesion') {
+      localStorage.removeItem('User');
+      setUser(null);
+      navigate('/login');
+    } else if (setting.name === 'Perfil') {
+      navigate(setting.link);
+    }
   };
   return (
     <AppBar sx={{ backgroundColor: 'white' }}>
@@ -30,7 +44,8 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <Box
             justifyContent="space-between"
-            sx={{ width: '100%', display: 'flex' }}>
+            sx={{ width: '100%', display: 'flex' }}
+          >
             <Box>
               <Box
                 component="img"
@@ -66,10 +81,14 @@ const Navbar = () => {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}>
+                onClose={handleCloseUserMenu}
+              >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem
+                    key={setting.name}
+                    onClick={() => handleCloseUserMenu(setting)}
+                  >
+                    <Typography textAlign="center">{setting.name}</Typography>
                   </MenuItem>
                 ))}
               </Menu>

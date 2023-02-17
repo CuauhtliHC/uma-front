@@ -8,35 +8,37 @@ import {
   Grid,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import AlertMessage from '../commons/AlertMessage.jsx';
 
 const RegisterForm = () => {
   const [errors, setErrors] = useState({});
-  const [data, setData] = useState({
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  });
+  const [email, setEmail] = useState(null);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const dataEmails = ['cuau_daali@hotmail.com'];
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [passwordConfirm, setPasswordConfirm] = useState(null);
 
-  const validate = (dato) => {
+  const validate = () => {
     const errores = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    if (!dato.email) {
+    if (!email || email === '') {
       errores.email = 'El campo Email es obligatorio';
-    } else if (!emailRegex.test(dato.email)) {
+    } else if (!emailRegex.test(email)) {
       errores.email = 'El campo Email no es válido';
     }
 
-    if (!dato.password) {
+    if (!password) {
       errores.password = 'El campo Contraseña es obligatorio';
-    } else if (!passwordRegex.test(dato.password)) {
+    } else if (!passwordRegex.test(password)) {
       errores.password = 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número';
     }
 
-    if (!dato.passwordConfirm) {
+    if (!passwordConfirm) {
       errores.passwordConfirm = 'Repite tu contraseña';
-    } else if (dato.password !== dato.passwordConfirm) {
+    } else if (password !== passwordConfirm) {
       errores.passwordConfirm = 'Las contraseñas no coinciden';
     }
 
@@ -44,13 +46,35 @@ const RegisterForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const VerificateForm = validate(data);
+    const VerificateForm = validate();
     setErrors(VerificateForm);
-    // if (Object.keys(VerificateForm).length === 0)
+    if (
+      dataEmails.find((element) => element === email)
+      && Object.keys(VerificateForm).length === 0
+    ) {
+      setOpen(false);
+      setMessage({
+        description: 'Este mail ya esta registrado',
+        title: 'Error',
+        status: 'error',
+      });
+      setOpen(true);
+    } else if (
+      Object.keys(VerificateForm).length === 0
+    ) {
+      setOpen(false);
+      setMessage({
+        description: 'Se a registrado la cuenta',
+        title: 'Exito',
+        status: 'success',
+      });
+      setOpen(true);
+    }
   };
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
+        <AlertMessage open={open} message={message} setOpen={setOpen} />
         <FormControl fullWidth={true}>
           <InputLabel
             htmlFor="email"
@@ -60,7 +84,7 @@ const RegisterForm = () => {
           <Input
             id="email"
             type="email"
-            onChange={(e) => setData({ ...data, email: e.target.value })}
+            onChange={(e) => setEmail(e.target.value)}
           />
           {errors.email ? (
             <FormHelperText error>{errors.email}</FormHelperText>
@@ -79,7 +103,7 @@ const RegisterForm = () => {
           <Input
             id="pwd"
             type="password"
-            onChange={(e) => setData({ ...data, password: e.target.value })}
+            onChange={(e) => setPassword(e.target.value)}
           />
           {errors.password ? (
             <FormHelperText error>{errors.password}</FormHelperText>
@@ -100,7 +124,7 @@ const RegisterForm = () => {
           <Input
             id="pwd2"
             type="password"
-            onChange={(e) => setData({ ...data, passwordConfirm: e.target.value })
+            onChange={(e) => setPasswordConfirm(e.target.value)
             }
           />
           {errors.passwordConfirm ? (
