@@ -14,6 +14,7 @@ import usuariosFake from '../statics/DummyData/usuariosFake';
 const RegisterForm = () => {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState(null);
+  const [userName, setUserName] = useState(null);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
@@ -29,6 +30,9 @@ const RegisterForm = () => {
       errores.email = 'El campo Email es obligatorio';
     } else if (!emailRegex.test(email)) {
       errores.email = 'El campo Email no es válido';
+    }
+    if (!userName || userName === '') {
+      errores.userName = 'El campo Nombre del usuario es obligatorio';
     }
 
     if (!password) {
@@ -80,7 +84,7 @@ const RegisterForm = () => {
           <InputLabel
             htmlFor="email"
             style={{ fontSize: '17px', color: '#FEBC14' }}>
-            Usuario
+            Email del usuario
           </InputLabel>
           <Input
             id="email"
@@ -91,6 +95,26 @@ const RegisterForm = () => {
             <FormHelperText error>{errors.email}</FormHelperText>
           ) : (
             <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
+          )}
+        </FormControl>
+      </Grid>
+      <Grid item xs={12}>
+        <AlertMessage open={open} message={message} setOpen={setOpen} />
+        <FormControl fullWidth={true}>
+          <InputLabel
+            htmlFor="userName"
+            style={{ fontSize: '17px', color: '#FEBC14' }}>
+            Nombre del usuario
+          </InputLabel>
+          <Input
+            id="userName"
+            type="text"
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          {errors.userName ? (
+            <FormHelperText error>{errors.userName}</FormHelperText>
+          ) : (
+            <FormHelperText id="UserName-helper">Ingresa tu nombre de usuario</FormHelperText>
           )}
         </FormControl>
       </Grid>
@@ -115,12 +139,13 @@ const RegisterForm = () => {
           )}
         </FormControl>
       </Grid>
-      <Grid item xs={12}>
+      {password && (
+        <Grid item xs={12}>
         <FormControl fullWidth={true}>
           <InputLabel
             htmlFor="pwd2"
             style={{ fontSize: '17px', color: '#FEBC14' }}>
-            Contraseña
+            Confirmar contraseña
           </InputLabel>
           <Input
             id="pwd2"
@@ -137,6 +162,7 @@ const RegisterForm = () => {
           )}
         </FormControl>
       </Grid>
+      )}
       <Grid item xs={12}>
         <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
           Crear Usuario
