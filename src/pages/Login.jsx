@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import React from 'react';
-import LoginForm from '../components/LoginForm.jsx';
+import LoginForm from '../components/Login/LoginForm.jsx';
 import Logo from '../statics/images/logo.svg';
 
 const Login = () => {
