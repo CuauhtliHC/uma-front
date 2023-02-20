@@ -7,6 +7,7 @@ import { user } from '../../state/user.jsx';
 import { saveState } from '../../utils/browserStorage.jsx';
 import usuariosFake from '../../statics/DummyData/usuariosFake';
 import InputsForm from '../../commons/InputsForm.jsx';
+import BlueLargeButton from '../../commons/buttons/BlueLargeButton.jsx';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -74,9 +75,9 @@ const LoginForm = () => {
         <InputsForm labelText={'Contraseña'} inputType={'password'} setData={setPassword} errorsType={errors.password} textHelperForm={'Ingresá tu contraseña'}/>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
+        <BlueLargeButton handleSubmit={handleSubmit}>
           Ingresar
-        </Button>
+        </BlueLargeButton>
         <Link to={'/recuperar_contraseña'} style={{ textDecoration: 'none' }}>
           <Button
             fullWidth={true}

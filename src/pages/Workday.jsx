@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  Button,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -12,6 +11,7 @@ import '../statics/styles/workday.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Card from '../components/Card.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
+import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 
 const Workday = () => {
   const navigate = useNavigate();
@@ -20,9 +20,9 @@ const Workday = () => {
   };
   return (
     <Box className="divMasterWorkday">
-      <Button variant="contained" fullWidth onClick={toGetPackage}>
+      <BlueLargeButton handleSubmit={toGetPackage}>
         OBTENER PAQUETES
-      </Button>
+      </BlueLargeButton>
       <Accordion className="accordionWorkday">
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
