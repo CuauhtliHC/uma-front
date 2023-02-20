@@ -9,7 +9,7 @@ const DatesCarousel = () => {
   const [emblaRef] = useEmblaCarousel({ loop: false, startIndex: index });
 
   return (
-    <Box overflow="hidden" ref={emblaRef}>
+    <Box overflow="hidden" ref={emblaRef} mt='37px'>
       <Box display="flex">
         {arrayDates.map((day, i) => <CommonDate day={day} key={i}/>)}
       </Box>
