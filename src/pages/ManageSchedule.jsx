@@ -4,13 +4,13 @@ import {
   AccordionSummary,
   Avatar,
   Box,
-  Button,
   Typography,
 } from '@mui/material';
 import React from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DatesCarousel from '../components/DatesCarousel.jsx';
 import ProgressCircle from '../commons/ProgressCircle.jsx';
+import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 
 const ManageSchedule = () => {
   return (
@@ -33,7 +33,9 @@ const ManageSchedule = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography fontSize='16px' fontWeight={700}>15/02/23 - Detalles</Typography>
+          <Typography fontSize="16px" fontWeight={700}>
+            15/02/23 - Detalles
+          </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Box>
@@ -48,26 +50,9 @@ const ManageSchedule = () => {
                 </Typography>
               </Box>
             </Box>
-            <Button
-              sx={{
-                borderRadius: '4px',
-                marginTop: '10px',
-                boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)',
-              }}
-              variant="contained"
-              fullWidth
-            >
-              <Typography
-                color="white"
-                fontStyle="normal"
-                fontWeight={500}
-                fontSize="15px"
-              >
-                Ver Repartidores
-              </Typography>
-            </Button>
+            <BlueLargeButton>Ver Repartidores</BlueLargeButton>
           </Box>
-          <Box mt='29px'>
+          <Box mt="29px">
             <Box display="flex">
               <ProgressCircle progress={80} />
               <Box ml="21px">
@@ -79,24 +64,7 @@ const ManageSchedule = () => {
                 </Typography>
               </Box>
             </Box>
-            <Button
-              sx={{
-                borderRadius: '4px',
-                marginTop: '10px',
-                boxShadow: '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)',
-              }}
-              variant="contained"
-              fullWidth
-            >
-              <Typography
-                color="white"
-                fontStyle="normal"
-                fontWeight={500}
-                fontSize="15px"
-              >
-                Ver Paquetes
-              </Typography>
-            </Button>
+            <BlueLargeButton>Ver Paquetes</BlueLargeButton>
           </Box>
         </AccordionDetails>
       </Accordion>

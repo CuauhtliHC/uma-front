@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.8",
     "@mui/styled-engine-sc": "^5.11.0",
+    "@mui/system": "^5.11.9",
     "@react-google-maps/api": "^2.18.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

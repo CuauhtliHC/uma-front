@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
 import InputsForm from '../commons/InputsForm.jsx';
+import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 
 const RegisterForm = () => {
   const [errors, setErrors] = useState({});
@@ -88,9 +89,9 @@ const RegisterForm = () => {
       </Grid>
       )}
       <Grid item xs={12}>
-        <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
+        <BlueLargeButton handleSubmit={handleSubmit}>
           Crear Usuario
-        </Button>
+        </BlueLargeButton>
         <Link to={'/login'} style={{ textDecoration: 'none' }}>
           <Button
             fullWidth={true}
