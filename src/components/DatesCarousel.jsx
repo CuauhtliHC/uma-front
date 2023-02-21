@@ -1,19 +1,27 @@
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
-import { Box } from '@mui/material';
-import CommonDate from '../commons/CommonDate.jsx';
+import BoxDate from '../commons/carrousel/BoxDate.jsx';
 import getDatesInRange from '../utils/arrayOfDates.jsx';
+import {
+  BoxMain,
+  SecondaryBox,
+} from '../statics/styles/manageSchedule/carrousel/carrousel.jsx';
+import Dates from '../commons/carrousel/Dates.jsx';
 
 const DatesCarousel = () => {
   const { arrayDates, index } = getDatesInRange();
   const [emblaRef] = useEmblaCarousel({ loop: false, startIndex: index });
 
   return (
-    <Box overflow="hidden" ref={emblaRef} mt='37px'>
-      <Box display="flex">
-        {arrayDates.map((day, i) => <CommonDate day={day} key={i}/>)}
-      </Box>
-    </Box>
+    <BoxMain ref={emblaRef}>
+      <SecondaryBox>
+        {arrayDates.map((day, i) => (
+          <BoxDate day={day} key={i}>
+            <Dates day={day}/>
+          </BoxDate>
+        ))}
+      </SecondaryBox>
+    </BoxMain>
   );
 };
 
