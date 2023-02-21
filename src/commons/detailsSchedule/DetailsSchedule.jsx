@@ -6,7 +6,7 @@ import {
   TypographyDetails,
 } from '../../statics/styles/manageSchedule/detailsSchedule/detailsCard.jsx';
 import BlueLargeButton from '../buttons/BlueLargeButton.jsx';
-import ProgressCircle from '../ProgressCircle.jsx';
+import ProgressCircle from './ProgressCircle.jsx';
 
 const DetailsSchedule = ({ title, description, progress }) => {
   return (
