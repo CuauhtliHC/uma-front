@@ -1,32 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { BoxInter, BoxMain, TypographyProgress } from '../../statics/styles/circleProgress/circle.jsx';
 
 const CircularProgressWithLabel = (props) => {
   return (
-    <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+    <BoxMain>
       <CircularProgress variant="determinate" {...props} size='74px'/>
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: 'absolute',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '74px',
-          width: '74px',
-        }}
-      >
-        <Typography component="div" fontSize='16px' fontWeight={700}>
+      <BoxInter>
+        <TypographyProgress component="div">
           {`${Math.round(props.value)}%`}
-        </Typography>
-      </Box>
-    </Box>
+        </TypographyProgress>
+      </BoxInter>
+    </BoxMain>
   );
 };
 
