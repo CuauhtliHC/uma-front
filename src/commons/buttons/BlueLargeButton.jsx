@@ -2,7 +2,7 @@ import React from 'react';
 import {
   BlueButton,
   TypographyButton,
-} from '../../statics/styles/button/BlueButton.jsx';
+} from '../../statics/styles/button/blueButton.jsx';
 
 const BlueLargeButton = ({ children, handleSubmit }) => {
   return (
