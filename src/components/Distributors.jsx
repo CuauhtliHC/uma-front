@@ -16,7 +16,7 @@ const Distributors = () => {
     <Box sx={{ margin: '5vw' }}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Repartidores</Typography>
+          <Typography fontWeight="bold">Repartidores</Typography>
         </AccordionSummary>
         <AccordionDetails>
           {repartidoresFake.map((data) => (
