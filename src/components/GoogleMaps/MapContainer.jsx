@@ -1,10 +1,8 @@
-/* eslint-disable react/no-unknown-property */
 import React, { useState, useEffect } from 'react';
 import {
   DirectionsRenderer,
   DirectionsService,
   GoogleMap,
-  LoadScript,
   Marker,
   useLoadScript,
 } from '@react-google-maps/api';
