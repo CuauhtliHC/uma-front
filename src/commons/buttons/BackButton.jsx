@@ -6,8 +6,8 @@ import {
 
 const BackButton = ({ handleSubmit }) => {
   return (
-    <IconBackButton onClick={handleSubmit}>
-      <ArrowIcon />
+    <IconBackButton sx={{ margin: '0.5vw' }} onClick={handleSubmit}>
+      <ArrowIcon sx={{ width: '26px', height: '26px', color: 'black' }}/>
     </IconBackButton>
   );
 };

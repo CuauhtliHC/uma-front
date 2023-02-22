@@ -1,16 +1,14 @@
 import { IconButton } from '@mui/material';
 import React from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useNavigate } from 'react-router';
 import Distributors from '../components/Distributors.jsx';
+import BackButton from '../commons/buttons/BackButton.jsx';
 
 const ManageDistributors = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <IconButton sx={{ margin: '0.5vw' }}>
-        <ArrowBackIosNewIcon
-          sx={{ width: '26px', height: '26px', color: 'black' }}
-        />
-      </IconButton>
+      <BackButton handleSubmit={() => navigate('/gestionar_agenda')} />
       <Distributors />
     </>
   );
