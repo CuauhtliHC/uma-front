@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   Container,
-  Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -12,36 +11,60 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { useSetRecoilState } from 'recoil';
+import { user } from '../state/user.jsx';
+import avatarImg from '../statics/images/avatar.png';
+import logoFD from '../statics/images/logoFastDelivery.jpeg';
 
 const Navbar = () => {
-  const settings = ['Perfil', 'Cerrar Sesion'];
+  const navigate = useNavigate();
+  const setUser = useSetRecoilState(user);
+  const settings = [
+    { name: 'Perfil', link: '/mi_perfil' },
+    { name: 'Cerrar Sesion', link: '/logout' },
+  ];
   const [anchorElUser, setAnchorElUser] = useState(null);
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (setting) => {
     setAnchorElUser(null);
+    if (setting.name === 'Cerrar Sesion') {
+      localStorage.removeItem('User');
+      setUser(null);
+      navigate('/login');
+    } else if (setting.name === 'Perfil') {
+      navigate(setting.link);
+    }
   };
   return (
     <AppBar sx={{ backgroundColor: 'white' }}>
       <Container>
         <Toolbar disableGutters>
-          <Grid justify="space-between" container spacing={34}>
-            <Grid item>
+          <Box
+            justifyContent="space-between"
+            sx={{ width: '100%', display: 'flex' }}
+          >
+            <Box>
               <Box
                 component="img"
                 sx={{
-                  height: 30,
-                  width: 30,
+                  width: '50px',
+                  height: 'auto',
                 }}
                 alt="Logo"
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
+                src={logoFD}
               />
-            </Grid>
-            <Grid item>
+            </Box>
+            <Box>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" sx={{ width: '30px', height: '30px' }}/>
+                  <Avatar
+                    alt="foto de perfil"
+                    src={avatarImg}
+                    sx={{ width: '35px', height: '35px' }}
+                  />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -61,13 +84,16 @@ const Navbar = () => {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem
+                    key={setting.name}
+                    onClick={() => handleCloseUserMenu(setting)}
+                  >
+                    <Typography textAlign="center">{setting.name}</Typography>
                   </MenuItem>
                 ))}
               </Menu>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
