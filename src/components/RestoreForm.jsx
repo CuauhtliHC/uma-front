@@ -9,54 +9,18 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
-import usuariosFake from '../statics/DummyData/usuariosFake';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
+import { funcRestorePass } from '../utils/forms/restorePass.jsx';
 
 const RestoreForm = () => {
   const [email, setEmail] = useState(null);
   const [errors, setErrors] = useState({});
-  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  const validate = () => {
-    const errores = {};
-    if (!email || email === '') {
-      errores.email = 'El campo Email es obligatorio';
-    } else if (!emailRegex.test(email)) {
-      errores.email = 'El campo Email no es válido';
-    }
-    return errores;
-  };
 
   const sendEmail = (e) => {
     e.preventDefault();
-    const VerificateForm = validate();
-    setErrors(VerificateForm);
-    if (
-      !dataEmails.find((element) => element === email)
-      && Object.keys(VerificateForm).length === 0
-    ) {
-      setOpen(false);
-      setMessage({
-        description: 'Esta mail no se encuentra registrado',
-        title: 'Error',
-        status: 'error',
-      });
-      setOpen(true);
-    } else if (
-      emailRegex.test(email)
-      && Object.keys(VerificateForm).length === 0
-    ) {
-      setOpen(false);
-      setMessage({
-        description: `Se envio un correo a ${email}`,
-        title: 'Exito',
-        status: 'success',
-      });
-      setOpen(true);
-    }
+    funcRestorePass(setErrors, setOpen, setMessage, email);
   };
 
   return (
