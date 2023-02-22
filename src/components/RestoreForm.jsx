@@ -10,6 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
+import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 
 const RestoreForm = () => {
   const [email, setEmail] = useState(null);
@@ -85,9 +86,9 @@ const RestoreForm = () => {
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" fullWidth={true} onClick={sendEmail}>
+        <BlueLargeButton handleSubmit={sendEmail}>
           Recuperar Contraseña
-        </Button>
+        </BlueLargeButton>
         <Link to={'/login'} style={{ textDecoration: 'none' }}>
           <Button
             fullWidth={true}

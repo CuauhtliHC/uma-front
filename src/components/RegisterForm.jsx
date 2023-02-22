@@ -1,27 +1,22 @@
 import React, { useState } from 'react';
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  Button,
-  Grid,
-} from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
+import InputsForm from '../commons/InputsForm.jsx';
+import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 
 const RegisterForm = () => {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState(null);
   const [userName, setUserName] = useState(null);
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
   const [password, setPassword] = useState(null);
   const [passwordConfirm, setPasswordConfirm] = useState(null);
+  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
   const validate = () => {
     const errores = {};
@@ -38,7 +33,7 @@ const RegisterForm = () => {
     if (!password) {
       errores.password = 'El campo Contraseña es obligatorio';
     } else if (!passwordRegex.test(password)) {
-      errores.password = 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número';
+      errores.password = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial';
     }
 
     if (!passwordConfirm) {
@@ -80,92 +75,23 @@ const RegisterForm = () => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <AlertMessage open={open} message={message} setOpen={setOpen} />
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="email"
-            style={{ fontSize: '17px', color: '#FEBC14' }}>
-            Email del usuario
-          </InputLabel>
-          <Input
-            id="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {errors.email ? (
-            <FormHelperText error>{errors.email}</FormHelperText>
-          ) : (
-            <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
-          )}
-        </FormControl>
+        <InputsForm labelText={' Email del usuario'} inputType={'email'} setData={setEmail} errorsType={errors.email} textHelperForm={'Ingresá tu email'}/>
       </Grid>
       <Grid item xs={12}>
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="userName"
-            style={{ fontSize: '17px', color: '#FEBC14' }}>
-            Nombre del usuario
-          </InputLabel>
-          <Input
-            id="userName"
-            type="text"
-            onChange={(e) => setUserName(e.target.value)}
-          />
-          {errors.userName ? (
-            <FormHelperText error>{errors.userName}</FormHelperText>
-          ) : (
-            <FormHelperText id="UserName-helper">Ingresa tu nombre de usuario</FormHelperText>
-          )}
-        </FormControl>
+      <InputsForm labelText={'Nombre del usuario'} inputType={'text'} setData={setUserName} errorsType={errors.userName} textHelperForm={'Ingresá tu nombre de usuario'}/>
       </Grid>
       <Grid item xs={12}>
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="pwd"
-            style={{ fontSize: '17px', color: '#FEBC14' }}>
-            Contraseña
-          </InputLabel>
-          <Input
-            id="pwd"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {errors.password ? (
-            <FormHelperText error>{errors.password}</FormHelperText>
-          ) : (
-            <FormHelperText id="password-helper">
-              Ingresa tu Contraseña
-            </FormHelperText>
-          )}
-        </FormControl>
+      <InputsForm labelText={'Contraseña'} inputType={'password'} setData={setPassword} errorsType={errors.password} textHelperForm={'Ingresá tu contraseña'}/>
       </Grid>
       {password && (
         <Grid item xs={12}>
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="pwd2"
-            style={{ fontSize: '17px', color: '#FEBC14' }}>
-            Confirmar contraseña
-          </InputLabel>
-          <Input
-            id="pwd2"
-            type="password"
-            onChange={(e) => setPasswordConfirm(e.target.value)
-            }
-          />
-          {errors.passwordConfirm ? (
-            <FormHelperText error>{errors.passwordConfirm}</FormHelperText>
-          ) : (
-            <FormHelperText id="password-helper">
-              Repite tu contraseña
-            </FormHelperText>
-          )}
-        </FormControl>
+        <InputsForm labelText={'Confirmar contraseña'} inputType={'password'} setData={setPasswordConfirm} errorsType={errors.passwordConfirm} textHelperForm={'Repite tu contraseña'}/>
       </Grid>
       )}
       <Grid item xs={12}>
-        <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
+        <BlueLargeButton handleSubmit={handleSubmit}>
           Crear Usuario
-        </Button>
+        </BlueLargeButton>
         <Link to={'/login'} style={{ textDecoration: 'none' }}>
           <Button
             fullWidth={true}

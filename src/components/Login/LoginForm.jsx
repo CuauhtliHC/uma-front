@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  Button,
-  Grid,
-} from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
-import AlertMessage from '../commons/AlertMessage.jsx';
-import { user } from '../state/user.jsx';
-import { saveState } from '../utils/browserStorage.jsx';
-import usuariosFake from '../statics/DummyData/usuariosFake';
+import AlertMessage from '../../commons/AlertMessage.jsx';
+import { user } from '../../state/user.jsx';
+import { saveState } from '../../utils/browserStorage.jsx';
+import usuariosFake from '../../statics/DummyData/usuariosFake';
+import InputsForm from '../../commons/InputsForm.jsx';
+import BlueLargeButton from '../../commons/buttons/BlueLargeButton.jsx';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -20,9 +15,9 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
+  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const validate = () => {
@@ -74,53 +69,15 @@ const LoginForm = () => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <AlertMessage open={open} message={message} setOpen={setOpen} />
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="email"
-            style={{ fontSize: '17px', color: '#FEBC14' }}
-          >
-            Usuario
-          </InputLabel>
-          <Input
-            id="email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          {errors.email ? (
-            <FormHelperText error>{errors.email}</FormHelperText>
-          ) : (
-            <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
-          )}
-        </FormControl>
+        <InputsForm labelText={'Usuario'} inputType={'email'} setData={setEmail} errorsType={errors.email} textHelperForm={'Ingresá tu email'}/>
       </Grid>
       <Grid item xs={12}>
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="pwd"
-            style={{ fontSize: '17px', color: '#FEBC14' }}
-          >
-            Contraseña
-          </InputLabel>
-          <Input
-            id="pwd"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          {errors.password ? (
-            <FormHelperText error>{errors.password}</FormHelperText>
-          ) : (
-            <FormHelperText id="password-helper">
-              Ingresa tu Contraseña
-            </FormHelperText>
-          )}
-        </FormControl>
+        <InputsForm labelText={'Contraseña'} inputType={'password'} setData={setPassword} errorsType={errors.password} textHelperForm={'Ingresá tu contraseña'}/>
       </Grid>
       <Grid item xs={12}>
-        <Button variant="contained" fullWidth={true} onClick={handleSubmit}>
+        <BlueLargeButton handleSubmit={handleSubmit}>
           Ingresar
-        </Button>
+        </BlueLargeButton>
         <Link to={'/recuperar_contraseña'} style={{ textDecoration: 'none' }}>
           <Button
             fullWidth={true}
