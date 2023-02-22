@@ -15,6 +15,7 @@ import LoggedRestricted from './LoggedRestricted.jsx';
 import CurrentDistribution from '../pages/CurrentDistribution/CurrentDistribution.jsx';
 import ManageSchedule from '../pages/ManageSchedule.jsx';
 import ManageDistributors from '../pages/ManageDistributors.jsx';
+import Error404 from '../pages/Error404.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -23,6 +24,7 @@ const Links = () => {
       <Route exact path="/" element={<Navigate to="/login" replace />} />
       <Route exact path="/gestionar_agenda" element={<ManageSchedule />} />
       <Route exact path="/gestionar_repartidores" element={<ManageDistributors/>}/>
+      <Route path='*' element={<Error404 />}/>
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import AddPackage from '../commons/AddPackage.jsx';
 import packageFake from '../statics/DummyData/packagesFake';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
@@ -8,10 +9,13 @@ import {
   MainBox,
   SubtitleGetPackage,
   TitleGetPackage,
+  WarningTypography,
 } from '../statics/styles/getPackage/title.jsx';
+import { listPackage } from '../state/addingPackage.jsx';
 
 const GetPackage = () => {
   const navigate = useNavigate();
+  const { total } = useRecoilValue(listPackage);
   const [data, setData] = useState(null);
   useEffect(() => {
     setData(packageFake);
@@ -30,6 +34,11 @@ const GetPackage = () => {
         <SubtitleGetPackage>
           ¿Cuantos paquetes más vas a repartir hoy?
         </SubtitleGetPackage>
+        { total > 10
+        && <WarningTypography>
+          Tiene mas de 10 paquetes seleccionados
+        </WarningTypography>
+        }
         {data
           ? data.map((dataPackage, i) => {
             return (
@@ -42,7 +51,7 @@ const GetPackage = () => {
             );
           })
           : null}
-        <BlueLargeButton handleSubmit={startJornada}>
+        <BlueLargeButton handleSubmit={startJornada} total={total}>
           INICIAR JORNADA
         </BlueLargeButton>
       </MainBox>
