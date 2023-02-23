@@ -6,6 +6,7 @@ import { styled } from '@mui/system';
 const TypographyDirection = styled(Typography)({
   fontWeight: 400,
   fontSize: '12px',
+  textAlign: 'center',
 });
 
 const MainBoxPackage = styled(Box)({

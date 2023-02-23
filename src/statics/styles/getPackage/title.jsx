@@ -8,7 +8,7 @@ const SubtitleGetPackage = styled(Typography)({ fontWeight: 400, fontSize: '12px
 
 const WarningTypography = styled(SubtitleGetPackage)({ color: red[800] });
 
-const MainBox = styled(Box)({ marginTop: '38px' });
+const MainBox = styled(Box)({ marginTop: '38px', marginBottom: '20px' });
 
 export {
   TitleGetPackage, SubtitleGetPackage, MainBox, WarningTypography,
