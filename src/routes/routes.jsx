@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Routes, Route, Navigate,
-} from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import GetPackage from '../pages/GetPackage.jsx';
 import Workday from '../pages/Workday.jsx';
@@ -16,6 +14,9 @@ import CurrentDistribution from '../pages/CurrentDistribution/CurrentDistributio
 import ManageSchedule from '../pages/ManageSchedule.jsx';
 import ManageDistributors from '../pages/ManageDistributors.jsx';
 import AddPacketAdmin from '../pages/AddPacketAdmin/AddPacketAdmin.jsx';
+import Error404 from '../pages/Error404.jsx';
+import DealerDetail from '../pages/DealerDetail.jsx';
+import ManagePackages from '../pages/ManagePackages.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -28,6 +29,14 @@ const Links = () => {
         path="/gestionar_repartidores"
         element={<ManageDistributors />}
       />
+      <Route
+        exact
+        path="/gestionar_repartidores/:id"
+        element={<DealerDetail />}
+      />
+      <Route path="*" element={<Error404 />} />
+      <Route exact path="/gestionar_paquetes" element={<ManagePackages />} />
+        <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />
@@ -37,7 +46,6 @@ const Links = () => {
           path="/obtener_paquete/:id"
           element={<CurrentDistribution />}
         />
-        <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       </Route>
       <Route element={<LoggedRestricted user={dataUser} />}>
         <Route exact path="/login" element={<Login />} />

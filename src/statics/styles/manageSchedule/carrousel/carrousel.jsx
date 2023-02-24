@@ -25,7 +25,7 @@ const BlueBoxDate = styled(Box)({
   display: 'flex',
   backgroundColor: '#217BCE',
   height: '99px',
-  marginTop: 2,
+  marginTop: '10px',
   width: '61px',
   borderRadius: '40px',
   flex: '0 0 15%',

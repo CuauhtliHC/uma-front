@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../statics/styles/workday.css';
 import {
   Accordion,
@@ -10,16 +11,30 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import repartidoresFake from '../statics/DummyData/repartidoresFake';
 import DistributorsCard from './DistributorsCard.jsx';
+import more from '../statics/images/more.png';
 
 const Distributors = () => {
+  const [showCount, setShowCount] = useState(3);
+
+  const handleShowMore = () => {
+    setShowCount(showCount + 3);
+  };
+
   return (
     <Box sx={{ margin: '5vw' }}>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Repartidores</Typography>
+          <Typography fontWeight="bold">Repartidores</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          {repartidoresFake.map((data) => (
+          {repartidoresFake.slice(0, showCount).map((data) => (
+              <Link
+              to={`/gestionar_repartidores/${data.id}`}
+              key={data.id}
+              style={{
+                textDecoration: 'none',
+                color: 'black',
+              }}>
             <DistributorsCard
               key={data.id}
               name={data.name}
@@ -27,7 +42,11 @@ const Distributors = () => {
               percentage={data.percentage}
               avatar={data.img}
             />
+            </Link>
           ))}
+          {showCount < repartidoresFake.length && (
+            <img src={more} alt='more' onClick={handleShowMore} style={{ marginLeft: '50%' }} />
+          )}
         </AccordionDetails>
       </Accordion>
     </Box>

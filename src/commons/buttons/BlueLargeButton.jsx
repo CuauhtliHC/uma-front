@@ -4,9 +4,9 @@ import {
   TypographyButton,
 } from '../../statics/styles/button/blueButton.jsx';
 
-const BlueLargeButton = ({ children, handleSubmit }) => {
+const BlueLargeButton = ({ children, handleSubmit, total }) => {
   return (
-    <BlueButton variant="contained" fullWidth onClick={handleSubmit}>
+    <BlueButton variant="contained" fullWidth onClick={handleSubmit} disabled={total > 10}>
       <TypographyButton>{children}</TypographyButton>
     </BlueButton>
   );

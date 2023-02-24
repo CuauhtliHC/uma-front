@@ -1,41 +1,60 @@
 import React from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
+import ProgressCircle from '../commons/detailsSchedule/ProgressCircleWithColor.jsx';
+import {
+  BoxMain,
+  BoxDetails,
+} from '../statics/styles/manageSchedule/detailsSchedule/detailsCard.jsx';
 
 const DistributorsCard = ({
   name, status, percentage, avatar,
 }) => {
+  const handleColorProgressBar = (progress) => {
+    console.log(typeof progress);
+    if (progress < 50) {
+      return '#FF6B6B';
+    }
+    if (progress < 100 && progress >= 50) {
+      return '#FCBC11';
+    }
+    if (progress === 100) {
+      return '#96DB76';
+    }
+  };
+
+  const handleColorStatus = (Status) => {
+    if (Status === 'Inactivo') {
+      return '#FF6B6B';
+    }
+    if (Status === 'Viaje en curso') {
+      return '#217BCE';
+    }
+    if (Status === 'Finalizó') {
+      return '#96DB76';
+    }
+  };
+
   return (
-    <Box style={{ marginTop: '5%' }}>
-      <Grid container spacing={2}>
-        <Grid item xs={8} container spacing={1}>
-          <Grid item xs>
-            <Typography variant="body2" gutterBottom>
-              {percentage}
-            </Typography>
-          </Grid>
-          <Grid item xs>
-            <Typography variant="body2" gutterBottom>
-              {name}
-            </Typography>
-          </Grid>
-          <Grid item xs={4}>
-            <Grid container direction="column" spacing={2} justify="flex-end">
-              <Grid item>
-                <Typography gutterBottom variant="subtitle2" component="div">
-                  {status}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item style={{ alignItems: 'center' }}>
-            <img
-              src={avatar}
-              alt="Reparto en curso"
-              style={{ width: '70px' }}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
+    <Box
+      justifyContent="space-between"
+      sx={{ width: '100%', display: 'flex', marginTop: '55px' }}>
+      <BoxMain>
+        <ProgressCircle
+          progress={percentage}
+          progressColor={() => handleColorProgressBar(percentage)}
+        />
+        <BoxDetails>
+          <Typography variant="body2" gutterBottom fontWeight="bold">
+            {name}
+          </Typography>
+          <Typography gutterBottom variant="subtitle2" component="div" color={handleColorStatus(status)}>
+            • {status}
+          </Typography>
+        </BoxDetails>
+      </BoxMain>
+      <BoxMain>
+        <Avatar alt="name" src={avatar} sx={{ width: 50, height: 50 }} />
+      </BoxMain>
     </Box>
   );
 };

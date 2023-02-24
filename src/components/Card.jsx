@@ -46,7 +46,11 @@ const Card = ({ direccion, estado }) => {
                 </IconButton>
               </Grid>
               <Grid item>
-                <Typography gutterBottom variant="subtitle2" component="div">
+                <Typography
+                  gutterBottom
+                  variant="subtitle2"
+                  component="div"
+                  style={{ textAlign: 'right' }}>
                   {estado}
                 </Typography>
               </Grid>
