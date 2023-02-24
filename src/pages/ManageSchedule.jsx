@@ -11,7 +11,7 @@ const ManageSchedule = () => {
       progress: 22, title: 'Repartidores', description: '2/10 activos', route: '/gestionar_repartidores',
     },
     {
-      progress: 80, title: 'Paquetes', description: '16/20 repartidos', route: '/404',
+      progress: 80, title: 'Paquetes', description: '16/20 repartidos', route: '/gestionar_paquetes',
     },
   ];
   return (
