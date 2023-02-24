@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router';
 import {
   Avatar,
   Box,
@@ -12,11 +13,18 @@ import {
 } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BackButton from '../commons/buttons/BackButton.jsx';
-import avatarImg from '../statics/images/avatar.png';
 import PendingPackages from '../components/PendingPackages.jsx';
 import HistorialPackages from '../components/HistorialPackages.jsx';
+import repartidoresFake from '../statics/DummyData/repartidoresFake';
 
 const DealerDetail = () => {
+  const params = useParams();
+  const idDealer = params.id;
+  const idArray = idDealer - 1;
+  const estado = repartidoresFake[idArray].status;
+  const fotoPerfil = repartidoresFake[idArray].img;
+  const nombre = repartidoresFake[idArray].name;
+
   const navigate = useNavigate();
   const backToDealer = () => {
     navigate('/gestionar_repartidores');
@@ -41,22 +49,24 @@ const DealerDetail = () => {
             <Grid item xs={2}>
               <Avatar
                 alt="foto de perfil"
-                src={avatarImg}
+                src={fotoPerfil}
                 sx={{ width: '50px', height: '50px' }}
               />
             </Grid>
             <Grid item xs={8}>
               <Typography fontWeight="bold" fontSize={20}>
-                Farid
+                {nombre}
               </Typography>
               <Typography
                 variant="subtitle2"
                 fontSize={15}
-                color={handleColorStatus('Inactivo')}>
-              <FiberManualRecordIcon
-                fontSize="small"
-                sx={{ color: handleColorStatus('Inactivo') }}
-              /> Inactivo
+                color={handleColorStatus(estado)}
+                >
+                <FiberManualRecordIcon
+                  fontSize="small"
+                  sx={{ color: handleColorStatus(estado) }}
+                />
+                {estado}
               </Typography>
             </Grid>
             <Grid item xs={1} style={{ textAlign: 'right' }}>
