@@ -7,8 +7,12 @@ import WelcomeCard from '../components/ManageSchedule/WelcomeCard.jsx';
 
 const ManageSchedule = () => {
   const data = [
-    { progress: 22, title: 'Repartidores', description: '2/10 activos' },
-    { progress: 80, title: 'Paquetes', description: '16/20 repartidos' },
+    {
+      progress: 22, title: 'Repartidores', description: '2/10 activos', route: '/gestionar_repartidores',
+    },
+    {
+      progress: 80, title: 'Paquetes', description: '16/20 repartidos', route: '/404',
+    },
   ];
   return (
     <>
@@ -21,6 +25,7 @@ const ManageSchedule = () => {
               progress={obj.progress}
               title={obj.title}
               description={obj.description}
+              route={obj.route}
             />
           </BoxDetails>
         ))}
