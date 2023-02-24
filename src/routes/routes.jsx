@@ -13,6 +13,7 @@ import LoggedRestricted from './LoggedRestricted.jsx';
 import CurrentDistribution from '../pages/CurrentDistribution/CurrentDistribution.jsx';
 import ManageSchedule from '../pages/ManageSchedule.jsx';
 import ManageDistributors from '../pages/ManageDistributors.jsx';
+import AddPacketAdmin from '../pages/AddPacketAdmin/AddPacketAdmin.jsx';
 import Error404 from '../pages/Error404.jsx';
 import DealerDetail from '../pages/DealerDetail.jsx';
 import ManagePackages from '../pages/ManagePackages.jsx';
@@ -35,6 +36,7 @@ const Links = () => {
       />
       <Route path="*" element={<Error404 />} />
       <Route exact path="/gestionar_paquetes" element={<ManagePackages />} />
+        <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />

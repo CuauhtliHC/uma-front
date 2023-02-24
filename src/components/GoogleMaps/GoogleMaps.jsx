@@ -7,7 +7,7 @@ import {
   useLoadScript,
 } from '@react-google-maps/api';
 
-const MapContainer = ({ destination }) => {
+const GoogleMaps = ({ destination }) => {
   const containerStyle = {
     position: 'relative',
     width: '75vw',
@@ -76,4 +76,4 @@ const MapContainer = ({ destination }) => {
   );
 };
 
-export default MapContainer;
+export default GoogleMaps;
