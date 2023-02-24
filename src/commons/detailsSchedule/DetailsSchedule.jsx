@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TittleAccordion } from '../../statics/styles/accordion/headerAccordion.jsx';
 import {
   BoxDetails,
@@ -8,7 +9,9 @@ import {
 import BlueLargeButton from '../buttons/BlueLargeButton.jsx';
 import ProgressCircle from './ProgressCircle.jsx';
 
-const DetailsSchedule = ({ title, description, progress }) => {
+const DetailsSchedule = ({
+  title, description, progress, route,
+}) => {
   return (
     <>
       <BoxMain>
@@ -18,7 +21,11 @@ const DetailsSchedule = ({ title, description, progress }) => {
           <TypographyDetails>{description}</TypographyDetails>
         </BoxDetails>
       </BoxMain>
-      <BlueLargeButton>Ver {title}</BlueLargeButton>
+      <Link to={route} style={{ textDecoration: 'none' }}>
+      <BlueLargeButton>
+        Ver {title}
+      </BlueLargeButton>
+      </Link>
     </>
   );
 };
