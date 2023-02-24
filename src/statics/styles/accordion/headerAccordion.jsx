@@ -8,4 +8,6 @@ const TittleAccordion = styled(Typography)({
   fontWeight: 700,
 });
 
-export { AccordionMain, TittleAccordion };
+const SubTitleAccordion = styled(Typography)({ fontWeight: 400, fontSize: '12px' });
+
+export { AccordionMain, TittleAccordion, SubTitleAccordion };
