@@ -15,6 +15,7 @@ import LoggedRestricted from './LoggedRestricted.jsx';
 import CurrentDistribution from '../pages/CurrentDistribution/CurrentDistribution.jsx';
 import ManageSchedule from '../pages/ManageSchedule.jsx';
 import ManageDistributors from '../pages/ManageDistributors.jsx';
+import AddPacketAdmin from '../pages/AddPacketAdmin/AddPacketAdmin.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -22,17 +23,30 @@ const Links = () => {
     <Routes>
       <Route exact path="/" element={<Navigate to="/login" replace />} />
       <Route exact path="/gestionar_agenda" element={<ManageSchedule />} />
-      <Route exact path="/gestionar_repartidores" element={<ManageDistributors/>}/>
+      <Route
+        exact
+        path="/gestionar_repartidores"
+        element={<ManageDistributors />}
+      />
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />
         <Route exact path="/iniciar_jornada" element={<Workday />} />
-        <Route exact path="/obtener_paquete/:id" element={<CurrentDistribution/>} />
+        <Route
+          exact
+          path="/obtener_paquete/:id"
+          element={<CurrentDistribution />}
+        />
+        <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       </Route>
       <Route element={<LoggedRestricted user={dataUser} />}>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/recuperar_contraseña" element={<RestorePassword />} />
+        <Route
+          exact
+          path="/recuperar_contraseña"
+          element={<RestorePassword />}
+        />
       </Route>
     </Routes>
   );

@@ -3,7 +3,7 @@ export async function saveState(state) {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('User', serializedState);
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 
