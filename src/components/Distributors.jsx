@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../statics/styles/workday.css';
 import {
   Accordion,
@@ -27,6 +28,13 @@ const Distributors = () => {
         </AccordionSummary>
         <AccordionDetails>
           {repartidoresFake.slice(0, showCount).map((data) => (
+              <Link
+              to={`/gestionar_repartidores/${data.id}`}
+              key={data.id}
+              style={{
+                textDecoration: 'none',
+                color: 'black',
+              }}>
             <DistributorsCard
               key={data.id}
               name={data.name}
@@ -34,6 +42,7 @@ const Distributors = () => {
               percentage={data.percentage}
               avatar={data.img}
             />
+            </Link>
           ))}
           {showCount < repartidoresFake.length && (
             <img src={more} alt='more' onClick={handleShowMore} style={{ marginLeft: '50%' }} />
