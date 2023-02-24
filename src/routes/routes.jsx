@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Routes, Route, Navigate,
-} from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import GetPackage from '../pages/GetPackage.jsx';
 import Workday from '../pages/Workday.jsx';
@@ -16,6 +14,7 @@ import CurrentDistribution from '../pages/CurrentDistribution/CurrentDistributio
 import ManageSchedule from '../pages/ManageSchedule.jsx';
 import ManageDistributors from '../pages/ManageDistributors.jsx';
 import Error404 from '../pages/Error404.jsx';
+import DealerDetail from '../pages/DealerDetail.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -23,18 +22,35 @@ const Links = () => {
     <Routes>
       <Route exact path="/" element={<Navigate to="/login" replace />} />
       <Route exact path="/gestionar_agenda" element={<ManageSchedule />} />
-      <Route exact path="/gestionar_repartidores" element={<ManageDistributors/>}/>
-      <Route path='*' element={<Error404 />}/>
+      <Route
+        exact
+        path="/gestionar_repartidores"
+        element={<ManageDistributors />}
+      />
+      <Route
+        exact
+        path="/gestionar_repartidores/:id"
+        element={<DealerDetail />}
+      />
+      <Route path="*" element={<Error404 />} />
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
         <Route exact path="/obtener_paquete" element={<GetPackage />} />
         <Route exact path="/iniciar_jornada" element={<Workday />} />
-        <Route exact path="/obtener_paquete/:id" element={<CurrentDistribution/>} />
+        <Route
+          exact
+          path="/obtener_paquete/:id"
+          element={<CurrentDistribution />}
+        />
       </Route>
       <Route element={<LoggedRestricted user={dataUser} />}>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/recuperar_contraseña" element={<RestorePassword />} />
+        <Route
+          exact
+          path="/recuperar_contraseña"
+          element={<RestorePassword />}
+        />
       </Route>
     </Routes>
   );
