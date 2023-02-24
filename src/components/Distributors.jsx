@@ -6,8 +6,6 @@ import {
   AccordionSummary,
   Box,
   Typography,
-  Button,
-  Icon,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import repartidoresFake from '../statics/DummyData/repartidoresFake';
