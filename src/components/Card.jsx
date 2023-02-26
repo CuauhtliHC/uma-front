@@ -1,37 +1,26 @@
 import React from 'react';
-import {
-  Divider, Grid, Typography, Box, IconButton,
-} from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-import redBox from '../statics/images/caja-roja.png';
-import greenBox from '../statics/images/caja-verde.png';
-import yellowBox from '../statics/images/caja-amarilla.png';
-import blueBox from '../statics/images/caja-azul.png';
+import {
+  DividerCard,
+  GridCenterItem,
+  GridRightContainer,
+  GridRightItem,
+  ImgPackage,
+  MainBoxCard,
+  StatusTypography,
+} from '../statics/styles/cardPackage.jsx';
+import { changeImg } from '../utils/changeColorPackage.jsx';
 
 const Card = ({ direccion, estado }) => {
-  let boxImg;
-
-  function cambiarImg() {
-    if (estado === 'Entregado') {
-      boxImg = greenBox;
-    } else if (estado === 'Cancelado') {
-      boxImg = redBox;
-    } else if (estado === 'En viaje') {
-      boxImg = yellowBox;
-    } else if (estado === 'Pendiente') {
-      boxImg = blueBox;
-    }
-  }
-
-  cambiarImg();
-
   return (
-    <Box style={{ marginTop: '5%' }}>
+    <MainBoxCard>
       <Grid container spacing={2}>
-        <Grid item style={{ alignItems: 'center' }}>
-          <img src={boxImg} alt="Reparto en curso" style={{ width: '70px' }} />
-        </Grid>
+        <GridCenterItem item>
+          <ImgPackage component="img" src={changeImg(estado)} alt="Reparto en curso" />
+        </GridCenterItem>
         <Grid item xs={8} container spacing={1}>
           <Grid item xs>
             <Typography variant="body2" gutterBottom>
@@ -39,27 +28,27 @@ const Card = ({ direccion, estado }) => {
             </Typography>
           </Grid>
           <Grid item xs={4}>
-            <Grid container direction="column" spacing={2} justify="flex-end">
-              <Grid item style={{ textAlign: 'right' }}>
+            <GridRightContainer container spacing={2}>
+              <GridRightItem item>
                 <IconButton edge="end" aria-label="delete">
                   <DeleteIcon />
                 </IconButton>
-              </Grid>
+              </GridRightItem>
               <Grid item>
-                <Typography
+                <StatusTypography
                   gutterBottom
                   variant="subtitle2"
                   component="div"
-                  style={{ textAlign: 'right' }}>
+                >
                   {estado}
-                </Typography>
+                </StatusTypography>
               </Grid>
-            </Grid>
+            </GridRightContainer>
           </Grid>
         </Grid>
       </Grid>
-      <Divider variant="inset" style={{ marginTop: '3%' }} />
-    </Box>
+      <DividerCard variant="inset" />
+    </MainBoxCard>
   );
 };
 

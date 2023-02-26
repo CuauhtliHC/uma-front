@@ -1,5 +1,6 @@
-import { Box, IconButton } from '@mui/material';
-import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import styled from '@mui/system/styled';
 
 const IconMoreButton = styled(IconButton)({ marginTop: '10px' });
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import {
-  FormControl, InputLabel, Input, FormHelperText,
-} from '@mui/material';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input';
+import { InputLabelCustom } from '../statics/styles/inputForm.jsx';
 
 const InputsForm = ({
   labelText,
@@ -12,9 +13,9 @@ const InputsForm = ({
 }) => {
   return (
     <FormControl fullWidth={true}>
-      <InputLabel style={{ fontSize: '17px', color: '#FEBC14' }}>
+      <InputLabelCustom>
         {labelText}
-      </InputLabel>
+      </InputLabelCustom>
       <Input type={inputType} onChange={(e) => setData(e.target.value)} />
       {errorsType ? (
         <FormHelperText error>{errorsType}</FormHelperText>

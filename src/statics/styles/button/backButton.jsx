@@ -2,8 +2,8 @@ import { IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { styled } from '@mui/system';
 
-const IconBackButton = styled(IconButton)({ padding: 0 });
+const IconBackButton = styled(IconButton)({ padding: 0, margin: '0.5vw' });
 
-const ArrowIcon = styled(ArrowBackIosNewIcon)({ width: '26px', height: '26px' });
+const ArrowIcon = styled(ArrowBackIosNewIcon)({ width: '26px', height: '26px', color: 'black' });
 
 export { IconBackButton, ArrowIcon };
