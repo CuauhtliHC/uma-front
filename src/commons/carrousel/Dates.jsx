@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/system';
+import Box from '@mui/material/Box';
 import { TypographyDay, TypographyNumDay } from '../../statics/styles/manageSchedule/carrousel/carrousel.jsx';
 
 const Dates = ({ day }) => {

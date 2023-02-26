@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Grid } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import AlertMessage from '../../commons/AlertMessage.jsx';
 import { user } from '../../state/user.jsx';
@@ -8,6 +9,7 @@ import { saveState } from '../../utils/browserStorage.jsx';
 import InputsForm from '../../commons/InputsForm.jsx';
 import BlueLargeButton from '../../commons/buttons/BlueLargeButton.jsx';
 import { funcLogin } from '../../utils/forms/login.jsx';
+import { RestorePassButton } from '../../statics/styles/button/restorePassButton.jsx';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -44,19 +46,15 @@ const LoginForm = () => {
         <BlueLargeButton handleSubmit={handleSubmit}>
           Ingresar
         </BlueLargeButton>
-        <Link to={'/recuperar_contraseña'} style={{ textDecoration: 'none' }}>
-          <Button
+          <RestorePassButton
             fullWidth={true}
-            style={{ fontWeight: '300', textTransform: 'none' }}
+            onClick={() => navigate('/recuperar_contraseña')}
           >
             Recuperar Contraseña
-          </Button>
-        </Link>
-        <Link to={'/register'} style={{ textDecoration: 'none' }}>
-          <Button fullWidth={true} style={{ textTransform: 'none' }}>
+          </RestorePassButton>
+          <Button fullWidth={true} onClick={() => navigate('/register')}>
             Registrarse
           </Button>
-        </Link>
       </Grid>
     </Grid>
   );

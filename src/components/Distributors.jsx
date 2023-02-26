@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../statics/styles/workday.css';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  Typography,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import repartidoresFake from '../statics/DummyData/repartidoresFake';
 import DistributorsCard from './DistributorsCard.jsx';
-import more from '../statics/images/more.png';
+import FullAccordion from '../commons/accordion/FullAccordion.jsx';
+import MoreButton from '../commons/buttons/MoreButton.jsx';
+import { MainBoxDistributors } from '../statics/styles/distributors/distributorsStyle.jsx';
 
 const Distributors = () => {
   const [showCount, setShowCount] = useState(3);
@@ -21,20 +14,17 @@ const Distributors = () => {
   };
 
   return (
-    <Box sx={{ margin: '5vw' }}>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography fontWeight="bold">Repartidores</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {repartidoresFake.slice(0, showCount).map((data) => (
-              <Link
-              to={`/gestionar_repartidores/${data.id}`}
-              key={data.id}
-              style={{
-                textDecoration: 'none',
-                color: 'black',
-              }}>
+    <MainBoxDistributors>
+      <FullAccordion title={'Repartidores'}>
+        {repartidoresFake.slice(0, showCount).map((data) => (
+          <Link
+            to={`/gestionar_repartidores/${data.id}`}
+            key={data.id}
+            style={{
+              textDecoration: 'none',
+              color: 'black',
+            }}
+          >
             <DistributorsCard
               key={data.id}
               name={data.name}
@@ -42,14 +32,13 @@ const Distributors = () => {
               percentage={data.percentage}
               avatar={data.img}
             />
-            </Link>
-          ))}
-          {showCount < repartidoresFake.length && (
-            <img src={more} alt='more' onClick={handleShowMore} style={{ marginLeft: '50%' }} />
-          )}
-        </AccordionDetails>
-      </Accordion>
-    </Box>
+          </Link>
+        ))}
+        {showCount < repartidoresFake.length && (
+          <MoreButton more={handleShowMore} />
+        )}
+      </FullAccordion>
+    </MainBoxDistributors>
   );
 };
 

@@ -1,31 +1,32 @@
+import AlertTitle from '@mui/material/AlertTitle';
+import Collapse from '@mui/material/Collapse';
 import {
-  Alert, AlertTitle, Collapse, IconButton,
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+  AlertBox,
+  CloseButton,
+  IconClose,
+} from '../statics/styles/alertMessage.jsx';
 
 const AlertMessage = ({ open, message, setOpen }) => {
   return (
     <Collapse in={open}>
       {message && (
-        <Alert
+        <AlertBox
           action={
-            <IconButton
+            <CloseButton
               aria-label="close"
-              color="inherit"
               size="small"
               onClick={() => {
                 setOpen(false);
               }}
             >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
+              <IconClose />
+            </CloseButton>
           }
-          sx={{ mb: 2 }}
           severity={message.status}
         >
           <AlertTitle>{message.title}</AlertTitle>
           {message.description}
-        </Alert>
+        </AlertBox>
       )}
     </Collapse>
   );
