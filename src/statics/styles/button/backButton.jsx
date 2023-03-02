@@ -1,6 +1,6 @@
-import { IconButton } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { styled } from '@mui/system';
+import styled from '@mui/system/styled';
 
 const IconBackButton = styled(IconButton)({ padding: 0, margin: '0.5vw' });
 

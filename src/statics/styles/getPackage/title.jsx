@@ -1,6 +1,7 @@
-import { Box, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
-import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import red from '@mui/material/colors/red';
+import styled from '@mui/system/styled';
 
 const TitleGetPackage = styled(Typography)({ fontWeight: 700, fontSize: '16px' });
 

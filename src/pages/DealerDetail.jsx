@@ -1,21 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
-import {
-  Avatar,
-  Box,
-  Paper,
-  Grid,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Switch,
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BackButton from '../commons/buttons/BackButton.jsx';
 import PendingPackages from '../components/PendingPackages.jsx';
 import HistorialPackages from '../components/HistorialPackages.jsx';
 import repartidoresFake from '../statics/DummyData/repartidoresFake';
+import { handleColorStatus } from '../utils/circleProgressFunctions.jsx';
+import {
+  GridButtonActive,
+  PaperDetail,
+  PrincipalBox,
+  TypographyName,
+} from '../statics/styles/dealerDetailStyle.jsx';
+import { AvatarDistributorCard } from '../statics/styles/distributors/distributorsCardStyle.jsx';
 
 const DealerDetail = () => {
   const params = useParams();
@@ -29,57 +32,40 @@ const DealerDetail = () => {
   const backToDealer = () => {
     navigate('/gestionar_repartidores');
   };
-  const handleColorStatus = (Status) => {
-    if (Status === 'Inactivo') {
-      return '#FF6B6B';
-    }
-    if (Status === 'Viaje en curso') {
-      return '#217BCE';
-    }
-    if (Status === 'Finalizó') {
-      return '#96DB76';
-    }
-  };
   return (
-    <div>
+    <>
       <BackButton handleSubmit={backToDealer} />
-      <Box style={{ marginTop: '5%' }}>
-        <Paper style={{ margin: '2%', padding: '4%' }}>
+      <PrincipalBox>
+        <PaperDetail>
           <Grid container spacing={3}>
             <Grid item xs={2}>
-              <Avatar
-                alt="foto de perfil"
-                src={fotoPerfil}
-                sx={{ width: '50px', height: '50px' }}
-              />
+              <AvatarDistributorCard alt="foto de perfil" src={fotoPerfil} />
             </Grid>
             <Grid item xs={8}>
-              <Typography fontWeight="bold" fontSize={20}>
-                {nombre}
-              </Typography>
+              <TypographyName>{nombre}</TypographyName>
               <Typography
                 variant="subtitle2"
                 fontSize={15}
                 color={handleColorStatus(estado)}
-                >
+              >
                 <FiberManualRecordIcon
                   fontSize="small"
-                  sx={{ color: handleColorStatus(estado) }}
+                  color={handleColorStatus(estado)}
                 />
                 {estado}
               </Typography>
             </Grid>
-            <Grid item xs={1} style={{ textAlign: 'right' }}>
+            <GridButtonActive item xs={1}>
               <FormGroup>
                 <FormControlLabel control={<Switch defaultChecked />} />
               </FormGroup>
-            </Grid>
+            </GridButtonActive>
           </Grid>
           <PendingPackages />
           <HistorialPackages />
-        </Paper>
-      </Box>
-    </div>
+        </PaperDetail>
+      </PrincipalBox>
+    </>
   );
 };
 

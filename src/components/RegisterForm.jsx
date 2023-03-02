@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Grid } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import InputsForm from '../commons/InputsForm.jsx';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 import { funcRegister } from '../utils/forms/register.jsx';
+import BackButtonForms from '../commons/buttons/BackButtonForms.jsx';
 
 const RegisterForm = () => {
   const [errors, setErrors] = useState({});
@@ -47,13 +47,7 @@ const RegisterForm = () => {
         <BlueLargeButton handleSubmit={handleSubmit}>
           Crear Usuario
         </BlueLargeButton>
-        <Link to={'/login'} style={{ textDecoration: 'none' }}>
-          <Button
-            fullWidth={true}
-            style={{ textTransform: 'none', textAlign: 'center' }}>
-            Regresar
-          </Button>
-        </Link>
+        <BackButtonForms />
       </Grid>
     </Grid>
   );
