@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  Button,
-  Grid,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 import { funcRestorePass } from '../utils/forms/restorePass.jsx';
+import BackButtonForms from '../commons/buttons/BackButtonForms.jsx';
+import InputsForm from '../commons/InputsForm.jsx';
 
 const RestoreForm = () => {
   const [email, setEmail] = useState(null);
@@ -27,40 +21,19 @@ const RestoreForm = () => {
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <AlertMessage open={open} message={message} setOpen={setOpen} />
-        <FormControl fullWidth={true}>
-          <InputLabel
-            htmlFor="email"
-            style={{ fontSize: '17px', color: '#FEBC14' }}
-          >
-            Email
-          </InputLabel>
-          <Input
-            id="email"
-            type="email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            required
-          />
-          {errors.email ? (
-            <FormHelperText error>{errors.email}</FormHelperText>
-          ) : (
-            <FormHelperText id="email-helper">Ingresa tu Email</FormHelperText>
-          )}
-        </FormControl>
+        <InputsForm
+          labelText={' Email del usuario'}
+          inputType={'email'}
+          setData={setEmail}
+          errorsType={errors.email}
+          textHelperForm={'Ingresá tu email'}
+        />
       </Grid>
       <Grid item xs={12}>
         <BlueLargeButton handleSubmit={sendEmail}>
           Recuperar Contraseña
         </BlueLargeButton>
-        <Link to={'/login'} style={{ textDecoration: 'none' }}>
-          <Button
-            fullWidth={true}
-            style={{ textTransform: 'none', textAlign: 'center' }}
-          >
-            Regresar
-          </Button>
-        </Link>
+        <BackButtonForms />
       </Grid>
     </Grid>
   );

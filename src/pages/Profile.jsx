@@ -1,34 +1,28 @@
 import React from 'react';
-import {
-  Avatar, Box, Grid, Typography, Button,
-} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import usuariosFake from '../statics/DummyData/usuariosFake';
+import {
+  AvatarProfile,
+  BoxButton,
+  ButtonDelete,
+  PrincipalGrid,
+  SecondGrid,
+} from '../statics/styles/profileStyle.jsx';
 
 const Profile = () => {
   return (
-    <Box>
-      <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
-        justify="center"
-        spacing={2}
-        style={{ marginTop: '2%', marginBottom: '8%' }}>
+    <>
+      <PrincipalGrid container spacing={2}>
         <Grid item>
-          <Avatar
+          <AvatarProfile
             alt="foto de perfil"
             src={usuariosFake[1].fotoPerfil}
-            sx={{ width: 150, height: 150 }}
           />
         </Grid>
-      </Grid>
-      <Grid
-        container
-        alignItems="center"
-        justifyContent="center"
-        justify="center"
-        spacing={2}
-        direction="column">
+      </PrincipalGrid>
+      <SecondGrid container spacing={2} direction="column">
         <Grid item xs={12}>
           <Typography> {usuariosFake[0].nombre}</Typography>
         </Grid>
@@ -43,20 +37,16 @@ const Profile = () => {
             Ya hiciste {usuariosFake[0].totalPaquetesEntregados} repartos
           </Typography>
         </Grid>
-      </Grid>
-      <Box style={{ margin: '2%', marginTop: '10%' }}>
+      </SecondGrid>
+      <BoxButton>
         <Button variant="contained" fullWidth>
           EDITAR PERFIL
         </Button>
-        <Button
-          variant="contained"
-          color="error"
-          fullWidth
-          style={{ marginTop: '5%' }}>
+        <ButtonDelete variant="contained" fullWidth>
           ELIMINAR USUARIO
-        </Button>
-      </Box>
-    </Box>
+        </ButtonDelete>
+      </BoxButton>
+    </>
   );
 };
 

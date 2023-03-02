@@ -1,4 +1,5 @@
-import { Button, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import { styled } from '@mui/system';
 
 const BlueButton = styled(Button)({

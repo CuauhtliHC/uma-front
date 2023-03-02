@@ -1,5 +1,6 @@
-import { Box, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import styled from '@mui/system/styled';
 
 const BoxMain = styled(Box)({ overflow: 'hidden', marginTop: '37px' });
 
