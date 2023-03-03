@@ -6,14 +6,9 @@ import {
   Marker,
   useLoadScript,
 } from '@react-google-maps/api';
+import { containerStyle } from '../../statics/styles/currentDistribution/currentDistributionStyle.jsx';
 
 const GoogleMaps = ({ destination }) => {
-  const containerStyle = {
-    position: 'relative',
-    width: '75vw',
-    height: '40vh',
-    margin: '10px 0px',
-  };
   const options = {
     disableDefaultUI: true,
     zoomControl: false,

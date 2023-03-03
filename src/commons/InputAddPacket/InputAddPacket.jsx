@@ -1,14 +1,16 @@
 import React from 'react';
-import { FormControl, InputLabel, Input } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input';
+import { InputLabelCustom } from '../../statics/styles/inputForm.jsx';
 
 const InputAddPacket = ({
   labelText, inputType, handleChange, name,
 }) => {
   return (
     <FormControl fullWidth={true}>
-      <InputLabel style={{ fontSize: '17px', color: '#FEBC14', margin: 0 }}>
+      <InputLabelCustom>
         {labelText}
-      </InputLabel>
+      </InputLabelCustom>
       <Input type={inputType} name={name} onChange={handleChange} />
     </FormControl>
   );

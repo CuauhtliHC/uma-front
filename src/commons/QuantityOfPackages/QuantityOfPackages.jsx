@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
+import Add from '@mui/icons-material/Add';
+import Remove from '@mui/icons-material/Remove';
 import {
+  BoxInForm,
   IconButtonAdd,
-  IconButtonRemove,
   TextNum,
 } from '../../statics/styles/getPackage/addPackage.jsx';
 
@@ -21,10 +21,10 @@ const QuantityOfPackages = () => {
   };
 
   return (
-    <Box display={'flex'} alignItems="center">
-      <IconButtonRemove style={{ margin: 0 }} onClick={removeQuantity}>
+    <BoxInForm>
+      <IconButtonAdd onClick={removeQuantity} disabled={quantity < 2}>
         <Remove />
-      </IconButtonRemove>
+      </IconButtonAdd>
       <TextNum
         type="number"
         value={quantity}
@@ -36,7 +36,7 @@ const QuantityOfPackages = () => {
       <IconButtonAdd onClick={addQuantity}>
         <Add />
       </IconButtonAdd>
-    </Box>
+    </BoxInForm>
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import usuariosFake from '../statics/DummyData/usuariosFake';
-import Card from './Card.jsx';
+import CardPackage from '../commons/CardPackage.jsx';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 
 const PendingPackages = () => {
@@ -25,7 +25,7 @@ const PendingPackages = () => {
                   }}
                   key={i}
                 >
-                  <Card
+                  <CardPackage
                     direccion={data.direccion}
                     estado={data.estado}
                     id={data.id}
@@ -35,9 +35,7 @@ const PendingPackages = () => {
             })}
           </>
         ) : (
-          <Typography>
-            No tenés repartos pendientes
-          </Typography>
+          <Typography>No tenés repartos pendientes</Typography>
         )}
       </FullAccordion>
     </>

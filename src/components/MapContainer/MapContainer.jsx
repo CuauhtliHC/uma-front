@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import Geocode from 'react-geocode';
+import {
+  MapContainerStyle,
+  TypographyError,
+} from '../../statics/styles/AddPackageAdmin/mapStyle.jsx';
 
 const MapContainer = ({ address }) => {
   const [marker, setMarker] = useState(null);
@@ -33,23 +37,20 @@ const MapContainer = ({ address }) => {
           {!errorMarker ? (
             <GoogleMap
               options={options}
-              mapContainerStyle={{
-                height: '30vh',
-                width: '100%',
-                margin: '5%',
-              }}
+              mapContainerStyle={MapContainerStyle}
               center={marker}
-              zoom={15}>
+              zoom={15}
+            >
               {marker && <Marker position={marker} />}
             </GoogleMap>
           ) : (
-            <p style={{ color: 'red', margin: '5%' }}>
+            <TypographyError>
               Direccion no encontrada, agregar mas detalle de la misma
-            </p>
-          )}{' '}
+            </TypographyError>
+          )}
         </>
       ) : (
-        <p>{loadError}</p>
+        <TypographyError>{loadError}</TypographyError>
       )}
     </>
   );
