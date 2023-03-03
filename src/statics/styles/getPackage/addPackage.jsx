@@ -30,9 +30,22 @@ const IconButtonRemove = styled(IconButtonAdd)({
 });
 
 const TextNum = styled(TextField)({
-  width: '29px', height: '29px', textAlign: 'center', padding: '8px 8px 8px 8px', alignItems: 'center', justifyContent: 'center', '& input': { textAlign: 'center' },
+  width: '29px',
+  height: '29px',
+  textAlign: 'center',
+  padding: '8px 8px 8px 8px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  '& input': { textAlign: 'center' },
 });
 
+const BoxInForm = styled(Box)({ display: 'flex', alignItems: 'center' });
+
 export {
-  TypographyDirection, MainBoxPackage, IconButtonRemove, IconButtonAdd, TextNum,
+  TypographyDirection,
+  MainBoxPackage,
+  IconButtonRemove,
+  IconButtonAdd,
+  TextNum,
+  BoxInForm,
 };

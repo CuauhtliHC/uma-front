@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 import BackButton from '../commons/buttons/BackButton.jsx';
-import Card from '../components/Card.jsx';
+import CardPackage from '../commons/CardPackage.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
 import ButtonBlueAdd from '../commons/buttons/ButtonBlueAdd.jsx';
 
@@ -21,7 +21,7 @@ const ManagePackages = () => {
         {usuariosFake[0].paquetesPendientes[0]
           && usuariosFake[0].paquetesPendientes.map((data, i) => {
             return (
-              <Card
+              <CardPackage
                 direccion={data.direccion}
                 estado={data.estado}
                 id={data.id}
@@ -30,7 +30,7 @@ const ManagePackages = () => {
             );
           })}
       </FullAccordion>
-      <ButtonBlueAdd handleSubmit={NavigateToAddPackage}/>
+      <ButtonBlueAdd handleSubmit={NavigateToAddPackage} />
     </>
   );
 };
