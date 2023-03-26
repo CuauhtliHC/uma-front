@@ -17,6 +17,7 @@ import AddPacketAdmin from '../pages/AddPacketAdmin/AddPacketAdmin.jsx';
 import Error404 from '../pages/Error404.jsx';
 import DealerDetail from '../pages/DealerDetail.jsx';
 import ManagePackages from '../pages/ManagePackages.jsx';
+import ResetPassword from '../pages/ResetPassword.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -55,6 +56,7 @@ const Links = () => {
           path="/recuperar_contraseña"
           element={<RestorePassword />}
         />
+        <Route exact path="/resetPassword/:token" element={<ResetPassword />} />
       </Route>
     </Routes>
   );
