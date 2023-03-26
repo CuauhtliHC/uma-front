@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import AlertMessage from '../../commons/AlertMessage.jsx';
@@ -19,6 +22,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState(null);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,28 +37,51 @@ const LoginForm = () => {
       setErrors,
     );
   };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <AlertMessage open={open} message={message} setOpen={setOpen} />
-        <InputsForm labelText={'Usuario'} inputType={'email'} setData={setEmail} errorsType={errors.email} textHelperForm={'Ingresá tu email'}/>
+        <InputsForm
+          labelText={'Usuario'}
+          inputType={'email'}
+          setData={setEmail}
+          errorsType={errors.email}
+          textHelperForm={'Ingresá tu email'}
+        />
       </Grid>
       <Grid item xs={12}>
-        <InputsForm labelText={'Contraseña'} inputType={'password'} setData={setPassword} errorsType={errors.password} textHelperForm={'Ingresá tu contraseña'}/>
+      <div style={{ position: 'relative' }}>
+    <InputsForm
+      labelText={'Contraseña'}
+      inputType={showPassword ? 'text' : 'password'}
+      setData={setPassword}
+      errorsType={errors.password}
+      textHelperForm={'Ingresá tu contraseña'}
+    />
+    <IconButton
+      style={{
+        position: 'absolute', top: '45%', right: 10, transform: 'translateY(-49%)',
+      }}
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+    </IconButton>
+  </div>
       </Grid>
       <Grid item xs={12}>
         <BlueLargeButton handleSubmit={handleSubmit}>
           Ingresar
         </BlueLargeButton>
-          <RestorePassButton
-            fullWidth={true}
-            onClick={() => navigate('/recuperar_contraseña')}
-          >
-            Recuperar Contraseña
-          </RestorePassButton>
-          <Button fullWidth={true} onClick={() => navigate('/register')}>
-            Registrarse
-          </Button>
+        <RestorePassButton
+          fullWidth={true}
+          onClick={() => navigate('/recuperar_contraseña')}
+        >
+          Recuperar Contraseña
+        </RestorePassButton>
+        <Button fullWidth={true} onClick={() => navigate('/register')}>
+          Registrarse
+        </Button>
       </Grid>
     </Grid>
   );
