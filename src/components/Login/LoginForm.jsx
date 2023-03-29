@@ -33,7 +33,6 @@ const LoginForm = () => {
       password,
       setUser,
       saveState,
-      navigate,
       setErrors,
     );
   };

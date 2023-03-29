@@ -7,6 +7,9 @@ const LoggedRestricted = ({
   children,
 }) => {
   if (user) {
+    if (user.isAdmin === 'ADMIN_ROL') {
+      return <Navigate to={'/gestionar_agenda'} replace />;
+    }
     return <Navigate to={redirectPath} replace />;
   }
 
