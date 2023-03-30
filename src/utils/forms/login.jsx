@@ -22,7 +22,6 @@ const funcLogin = async (
   password,
   setUser,
   saveState,
-  navigate,
   setErrors,
 ) => {
   const errors = validate(email, password);
@@ -34,16 +33,17 @@ const funcLogin = async (
         email,
         password,
       });
+      // console.log(response);
       const user = response.data.payload;
       const token = response.headers.authorization;
-      setUser({ id: user.id, email: user.email, isAdmin: user.isAdmin });
+      // console.log(user.rol);
+      setUser({ id: user.id, email: user.email, isAdmin: user.rol });
       saveState({
         id: user.id,
         email: user.email,
-        isAdmin: user.isAdmin,
+        isAdmin: user.rol,
         token,
       });
-      navigate('/iniciar_jornada');
     } catch (error) {
       setOpen(false);
       setMessage({
