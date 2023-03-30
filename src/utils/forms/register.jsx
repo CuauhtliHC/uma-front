@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { emailRegex, passwordRegex } from './regex.jsx';
-import usuariosFake from '../../statics/DummyData/usuariosFake';
 
 const validate = (email, userName, password, passwordConfirm) => {
   const errores = {};
@@ -28,7 +28,7 @@ const validate = (email, userName, password, passwordConfirm) => {
   return errores;
 };
 
-const funcRegister = (
+const funcRegister = async (
   setErrors,
   email,
   setOpen,
@@ -36,29 +36,47 @@ const funcRegister = (
   userName,
   password,
   passwordConfirm,
+  navigate,
 ) => {
-  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
   const VerificateForm = validate(email, userName, password, passwordConfirm);
   setErrors(VerificateForm);
-  if (
-    dataEmails.find((element) => element === email)
-    && Object.keys(VerificateForm).length === 0
-  ) {
-    setOpen(false);
-    setMessage({
-      description: 'Este mail ya esta registrado',
-      title: 'Error',
-      status: 'error',
-    });
-    setOpen(true);
-  } else if (Object.keys(VerificateForm).length === 0) {
-    setOpen(false);
-    setMessage({
-      description: 'Se a registrado la cuenta',
-      title: 'Exito',
-      status: 'success',
-    });
-    setOpen(true);
+  if (Object.keys(VerificateForm).length === 0) {
+    try {
+      const response = await axios.post(
+        'http://localhost:8080/api/users/register',
+        {
+          name: userName,
+          email,
+          password,
+        },
+      );
+      if (response.data.error) {
+        setOpen(false);
+        setMessage({
+          description: response.data.message,
+          title: 'Error',
+          status: 'error',
+        });
+        setOpen(true);
+      } else {
+        setOpen(false);
+        setMessage({
+          description: 'Se ha registrado la cuenta',
+          title: 'Éxito',
+          status: 'success',
+        });
+        setOpen(true);
+        setTimeout(() => navigate('/login'), 1000);
+      }
+    } catch (error) {
+      setOpen(false);
+      setMessage({
+        description: 'Ha ocurrido un error al registrar la cuenta',
+        title: 'Error',
+        status: 'error',
+      });
+      setOpen(true);
+    }
   }
 };
 

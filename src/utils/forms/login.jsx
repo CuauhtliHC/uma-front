@@ -33,10 +33,8 @@ const funcLogin = async (
         email,
         password,
       });
-      // console.log(response);
       const user = response.data.payload;
       const token = response.headers.authorization;
-      // console.log(user.rol);
       setUser({ id: user.id, email: user.email, isAdmin: user.rol });
       saveState({
         id: user.id,
