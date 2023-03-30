@@ -18,6 +18,7 @@ import Error404 from '../pages/Error404.jsx';
 import DealerDetail from '../pages/DealerDetail.jsx';
 import ManagePackages from '../pages/ManagePackages.jsx';
 import ResetPassword from '../pages/ResetPassword.jsx';
+import DDJJ from '../pages/DDJJ.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
@@ -37,6 +38,7 @@ const Links = () => {
       />
       <Route path="*" element={<Error404 />} />
       <Route exact path="/gestionar_paquetes" element={<ManagePackages />} />
+      <Route exact path="/ddjj" element={<DDJJ />} />
         <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
