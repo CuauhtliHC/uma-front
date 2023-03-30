@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { useNavigate } from 'react-router-dom';
 import AlertMessage from '../commons/AlertMessage.jsx';
 import InputsForm from '../commons/InputsForm.jsx';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
@@ -7,6 +8,7 @@ import { funcRegister } from '../utils/forms/register.jsx';
 import BackButtonForms from '../commons/buttons/BackButtonForms.jsx';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [email, setEmail] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -24,6 +26,7 @@ const RegisterForm = () => {
       userName,
       password,
       passwordConfirm,
+      navigate,
     );
   };
   return (
