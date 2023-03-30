@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import {
@@ -14,9 +13,9 @@ import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 const DDJJforms = () => {
   const { register, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
-      Consumió_Alcohol: '',
-      Consumió_Medicamentos: '',
-      Problemas_Emocionales: '',
+      Consumió_Alcohol: null,
+      Consumió_Medicamentos: null,
+      Problemas_Emocionales: null,
     },
   });
 
@@ -39,8 +38,8 @@ row
 aria-labelledby="demo-row-radio-buttons-group-label"
 name="row-radio-buttons-group">
 
-<FormControlLabel value="Si" control={<Radio />} label="Si" {...register('Consumió_Alcohol', { required: true })}/>
-<FormControlLabel value="No" control={<Radio />} label="No" {...register('Consumió_Alcohol', { required: true })} />
+<FormControlLabel value={true} control={<Radio />} label="Si" {...register('Consumió_Alcohol', { required: true })}/>
+<FormControlLabel value={false} control={<Radio />} label="No" {...register('Consumió_Alcohol', { required: true })} />
 </RadioGroup>
 <FormLabel>
 ¿Usted está haciendo uso de medicamentos psicoactivos? (Antigripales,
@@ -51,8 +50,8 @@ ansiolíticos, antidepresivos, sedantes y/o antialérgicos)
 row
 aria-labelledby="demo-row-radio-buttons-group-label"
 name="row-radio-buttons-group">
-<FormControlLabel value="Si" control={<Radio />} label="Si" {...register('Consumió_Medicamentos', { required: true })}/>
-<FormControlLabel value="No" control={<Radio />} label="No" {...register('Consumió_Medicamentos', { required: true })}/>
+<FormControlLabel value={true} control={<Radio />} label="Si" {...register('Consumió_Medicamentos', { required: true })}/>
+<FormControlLabel value={false} control={<Radio />} label="No" {...register('Consumió_Medicamentos', { required: true })}/>
 </RadioGroup>
 
 <FormLabel>
@@ -64,8 +63,8 @@ que lo distraiga?
 row
 aria-labelledby="demo-row-radio-buttons-group-label"
 name="row-radio-buttons-group">
-<FormControlLabel value="Si" control={<Radio />} label="Si" {...register('Problemas_Emocionales', { required: true })}/>
-<FormControlLabel value="No" control={<Radio />} label="No" {...register('Problemas_Emocionales', { required: true })}/>
+<FormControlLabel value={true} control={<Radio />} label="Si" {...register('Problemas_Emocionales', { required: true })}/>
+<FormControlLabel value={false} control={<Radio />} label="No" {...register('Problemas_Emocionales', { required: true })}/>
 </RadioGroup>
 <BlueLargeButton type="submit" handleSubmit={handleSubmit(onSubmit)}>
   Enviar DDJJ y continuar
