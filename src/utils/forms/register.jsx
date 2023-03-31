@@ -70,8 +70,11 @@ const funcRegister = async (
       }
     } catch (error) {
       setOpen(false);
+      let messageError;
+      // eslint-disable-next-line max-len
+      if (error.response.data.errors[0].value === email) messageError = error.response.data.errors[0].msg;
       setMessage({
-        description: 'Ha ocurrido un error al registrar la cuenta',
+        description: messageError,
         title: 'Error',
         status: 'error',
       });
