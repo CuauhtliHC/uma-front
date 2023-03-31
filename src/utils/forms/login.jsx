@@ -44,14 +44,12 @@ const funcLogin = async (
       });
     } catch (error) {
       setOpen(false);
-      console.log(error.response);
       let messageError;
       if (error.response.status === 404 || error.response.status === 400) {
         messageError = error.response.data.msg;
       } else {
         messageError = 'Credenciales incorrectas';
       }
-      console.log(messageError);
       setMessage({
         description: messageError,
         title: 'Error',
