@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { emailRegex } from './regex.jsx';
 
+const publicUrl = process.env.REACT_APP_URL_BACKEND;
+
 const validate = (email, password) => {
   const errors = {};
   if (!email || email === '') {
@@ -29,15 +31,18 @@ const funcLogin = async (
 
   if (Object.keys(errors).length === 0) {
     try {
-      const response = await axios.post('http://localhost:8080/api/login', {
+      const response = await axios.post(`${publicUrl}login`, {
         email,
         password,
       });
       const user = response.data.payload;
       const token = response.headers.authorization;
-      setUser({ id: user.id, email: user.email, isAdmin: user.rol });
+      setUser({
+        id: user.id, name: user.name, email: user.email, isAdmin: user.rol,
+      });
       saveState({
         id: user.id,
+        name: user.name,
         email: user.email,
         isAdmin: user.rol,
         token,

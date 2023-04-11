@@ -1,8 +1,8 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import usuariosFake from '../statics/DummyData/usuariosFake';
 import {
   AvatarProfile,
   BoxButton,
@@ -10,31 +10,34 @@ import {
   PrincipalGrid,
   SecondGrid,
 } from '../statics/styles/profileStyle.jsx';
+import { user } from '../state/user.jsx';
 
 const Profile = () => {
+  const dataUser = useRecoilValue(user);
+  console.log(dataUser);
   return (
     <>
       <PrincipalGrid container spacing={2}>
         <Grid item>
           <AvatarProfile
             alt="foto de perfil"
-            src={usuariosFake[1].fotoPerfil}
+            src={dataUser.fotoPerfil}
           />
         </Grid>
       </PrincipalGrid>
       <SecondGrid container spacing={2} direction="column">
         <Grid item xs={12}>
-          <Typography> {usuariosFake[0].nombre}</Typography>
+          <Typography> {dataUser.name}</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography>{usuariosFake[0].email}</Typography>
+          <Typography>{dataUser.email}</Typography>
         </Grid>
         <Grid item xs={6}>
-          <Typography>{usuariosFake[0].direccion}</Typography>
+          <Typography>{dataUser.direccion}</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography>
-            Ya hiciste {usuariosFake[0].totalPaquetesEntregados} repartos
+            Ya hiciste {dataUser.totalPaquetesEntregados} repartos
           </Typography>
         </Grid>
       </SecondGrid>
