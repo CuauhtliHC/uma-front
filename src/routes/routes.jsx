@@ -25,7 +25,7 @@ const Links = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Navigate to="/login" replace />} />
-      <Route exact path="/gestionar_agenda" element={<ManageSchedule />} />
+      <Route exact path="/gestionar_agenda/:day" element={<ManageSchedule />} />
       <Route
         exact
         path="/gestionar_repartidores"
