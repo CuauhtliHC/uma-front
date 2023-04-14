@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import repartidoresFake from '../statics/DummyData/repartidoresFake';
 import DistributorsCard from './DistributorsCard.jsx';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 import MoreButton from '../commons/buttons/MoreButton.jsx';
 import { MainBoxDistributors } from '../statics/styles/distributors/distributorsStyle.jsx';
+import { functGetDistributors, functionAddDataDistributors } from '../utils/getDistributors.jsx';
 
 const Distributors = () => {
-  const [showCount, setShowCount] = useState(3);
+  const [showCount, setShowCount] = useState(6);
+  const [dataUsers, setDataUsers] = useState(null);
+
+  useEffect(() => {
+    functGetDistributors(showCount, setDataUsers);
+  }, [showCount]);
 
   const handleShowMore = () => {
     setShowCount(showCount + 3);
@@ -16,7 +21,7 @@ const Distributors = () => {
   return (
     <MainBoxDistributors>
       <FullAccordion title={'Repartidores'}>
-        {repartidoresFake.slice(0, showCount).map((data) => (
+        {dataUsers && functionAddDataDistributors(dataUsers.rows, showCount).map((data) => (
           <Link
             to={`/gestionar_repartidores/${data.id}`}
             key={data.id}
@@ -34,7 +39,7 @@ const Distributors = () => {
             />
           </Link>
         ))}
-        {showCount < repartidoresFake.length && (
+        {dataUsers && showCount < dataUsers.rows && (
           <MoreButton more={handleShowMore} />
         )}
       </FullAccordion>

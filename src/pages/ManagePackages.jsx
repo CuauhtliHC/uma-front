@@ -5,11 +5,12 @@ import BackButton from '../commons/buttons/BackButton.jsx';
 import CardPackage from '../commons/CardPackage.jsx';
 import usuariosFake from '../statics/DummyData/usuariosFake';
 import ButtonBlueAdd from '../commons/buttons/ButtonBlueAdd.jsx';
+import { dateFormat } from '../utils/today.jsx';
 
 const ManagePackages = () => {
   const navigate = useNavigate();
   const BackToAgenda = () => {
-    navigate('/gestionar_agenda');
+    navigate(`/gestionar_agenda/${dateFormat}`);
   };
   const NavigateToAddPackage = () => {
     navigate('/addPacket');
