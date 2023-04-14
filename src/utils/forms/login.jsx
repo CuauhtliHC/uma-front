@@ -36,16 +36,23 @@ const funcLogin = async (
         password,
       });
       const user = response.data.payload;
-      const token = response.headers.authorization;
+      //  const token = response.headers.authorization;
+      console.log(response.data.payload);
       setUser({
-        id: user.id, name: user.name, email: user.email, isAdmin: user.rol,
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.rol,
+        ddjj: user.ddjj,
+        token: user.token,
       });
       saveState({
         id: user.id,
         name: user.name,
         email: user.email,
         isAdmin: user.rol,
-        token,
+        ddjj: user.ddjj,
+        token: user.token,
       });
     } catch (error) {
       setOpen(false);

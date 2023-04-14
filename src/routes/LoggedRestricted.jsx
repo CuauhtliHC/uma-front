@@ -4,7 +4,7 @@ import { dateFormat } from '../utils/today.jsx';
 
 const LoggedRestricted = ({
   user,
-  redirectPath = '/iniciar_jornada',
+  redirectPath = '/ddjj',
   children,
 }) => {
   if (user) {
