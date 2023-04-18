@@ -1,7 +1,9 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 import { emailRegex } from './regex.jsx';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
+const cookies = new Cookies();
 
 const validate = (email, password) => {
   const errors = {};
@@ -34,10 +36,11 @@ const funcLogin = async (
       const response = await axios.post(`${publicUrl}login`, {
         email,
         password,
+      }, {
+        withCredentials: true,
       });
       const user = response.data.payload;
-      //  const token = response.headers.authorization;
-      console.log(response.data.payload);
+      cookies.set('token', cookies.get('token'), { path: '/' });
       setUser({
         id: user.id,
         name: user.name,
