@@ -32,7 +32,7 @@ const functResetPass = (
   if (Object.keys(VerificateForm).length === 0) {
     setOpen(false);
     axios
-      .post(`${process.env.URL_BACKEND}/api/users/reset-password/${token}`, {
+      .post(`${process.env.URL_BACKEND}users/reset-password/${token}`, {
         password,
       })
       .then((res) => {

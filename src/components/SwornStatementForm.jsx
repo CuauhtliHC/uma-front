@@ -34,7 +34,9 @@ const SwornStatementForm = () => {
     };
 
     axios
-      .post(`${publicUrl}swornStatement/`, resultForm)
+      .post(`${publicUrl}swornStatement/`, resultForm, {
+        withCredentials: true,
+      })
       .then((response) => {
         console.log(response);
       })

@@ -38,12 +38,13 @@ const funcRegister = async (
   passwordConfirm,
   navigate,
 ) => {
+const publicUrl = process.env.REACT_APP_URL_BACKEND;
   const VerificateForm = validate(email, userName, password, passwordConfirm);
   setErrors(VerificateForm);
   if (Object.keys(VerificateForm).length === 0) {
     try {
       const response = await axios.post(
-        'http://localhost:8080/api/users/register',
+        `${publicUrl}users/register`,
         {
           name: userName,
           email,
