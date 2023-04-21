@@ -1,7 +1,8 @@
 import axios from 'axios';
-import repartidoresFake from '../statics/DummyData/repartidoresFake';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
+
+axios.defaults.withCredentials = true;
 
 const functGetDistributors = async (showCount, setDataUsers) => {
   try {
@@ -13,9 +14,9 @@ const functGetDistributors = async (showCount, setDataUsers) => {
 };
 
 const functionAddDataDistributors = (dataUsers, showCount) => {
-  return dataUsers.slice(0, showCount).map((data, i) => {
-    const { status, percentage } = repartidoresFake[i];
-    return { ...data, status, percentage };
+  const statusArray = ['Finalizó', 'Viaje en curso', 'Inactivo'];
+  return dataUsers.slice(0, showCount).map((data) => {
+    return { ...data, status: statusArray[data.StatusUserId - 1] };
   });
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router';
 import Grid from '@mui/material/Grid';
@@ -19,14 +19,19 @@ import {
   TypographyName,
 } from '../statics/styles/dealerDetailStyle.jsx';
 import { AvatarDistributorCard } from '../statics/styles/distributors/distributorsCardStyle.jsx';
+import { functGetDataUserById } from '../service/dataUser.jsx';
 
 const DealerDetail = () => {
+  const [dataUser, setDataUser] = useState(null);
   const params = useParams();
   const idDealer = params.id;
   const idArray = idDealer - 1;
   const estado = repartidoresFake[idArray].status;
   const fotoPerfil = repartidoresFake[idArray].img;
-  const nombre = repartidoresFake[idArray].name;
+
+  useEffect(() => {
+    functGetDataUserById(idDealer, setDataUser);
+  }, [idDealer]);
 
   const navigate = useNavigate();
   const backToDealer = () => {
@@ -36,34 +41,36 @@ const DealerDetail = () => {
     <>
       <BackButton handleSubmit={backToDealer} />
       <PrincipalBox>
-        <PaperDetail>
-          <Grid container spacing={3}>
-            <Grid item xs={2}>
-              <AvatarDistributorCard alt="foto de perfil" src={fotoPerfil} />
-            </Grid>
-            <Grid item xs={8}>
-              <TypographyName>{nombre}</TypographyName>
-              <Typography
-                variant="subtitle2"
-                fontSize={15}
-                color={handleColorStatus(estado)}
-              >
-                <FiberManualRecordIcon
-                  fontSize="small"
+        {dataUser && (
+          <PaperDetail>
+            <Grid container spacing={3}>
+              <Grid item xs={2}>
+                <AvatarDistributorCard alt="foto de perfil" src={fotoPerfil} />
+              </Grid>
+              <Grid item xs={8}>
+                <TypographyName>{dataUser.name}</TypographyName>
+                <Typography
+                  variant="subtitle2"
+                  fontSize={15}
                   color={handleColorStatus(estado)}
-                />
-                {estado}
-              </Typography>
+                >
+                  <FiberManualRecordIcon
+                    fontSize="small"
+                    color={handleColorStatus(estado)}
+                  />
+                  {estado}
+                </Typography>
+              </Grid>
+              <GridButtonActive item xs={1}>
+                <FormGroup>
+                  <FormControlLabel control={<Switch defaultChecked />} />
+                </FormGroup>
+              </GridButtonActive>
             </Grid>
-            <GridButtonActive item xs={1}>
-              <FormGroup>
-                <FormControlLabel control={<Switch defaultChecked />} />
-              </FormGroup>
-            </GridButtonActive>
-          </Grid>
-          <PendingPackages />
-          <HistorialPackages />
-        </PaperDetail>
+            <PendingPackages user={dataUser} />
+            <HistorialPackages user={dataUser} />
+          </PaperDetail>
+        )}
       </PrincipalBox>
     </>
   );

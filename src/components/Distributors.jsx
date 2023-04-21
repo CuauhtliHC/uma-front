@@ -4,7 +4,7 @@ import DistributorsCard from './DistributorsCard.jsx';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 import MoreButton from '../commons/buttons/MoreButton.jsx';
 import { MainBoxDistributors } from '../statics/styles/distributors/distributorsStyle.jsx';
-import { functGetDistributors, functionAddDataDistributors } from '../utils/getDistributors.jsx';
+import { functGetDistributors, functionAddDataDistributors } from '../service/getDistributors.jsx';
 
 const Distributors = () => {
   const [showCount, setShowCount] = useState(6);
@@ -39,7 +39,7 @@ const Distributors = () => {
             />
           </Link>
         ))}
-        {dataUsers && showCount < dataUsers.rows && (
+        {dataUsers && showCount < dataUsers.rows.length && (
           <MoreButton more={handleShowMore} />
         )}
       </FullAccordion>
