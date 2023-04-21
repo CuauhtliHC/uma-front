@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { useForm } from 'react-hook-form';
 import {
   FormControl,
@@ -14,6 +15,8 @@ import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
 const SwornStatementForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     formState: { errors },
@@ -39,6 +42,7 @@ const SwornStatementForm = () => {
       })
       .then((response) => {
         console.log(response);
+        navigate('/iniciar_jornada');
       })
       .catch((error) => {
         console.log(error);

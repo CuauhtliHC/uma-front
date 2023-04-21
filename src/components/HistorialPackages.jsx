@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import Typography from '@mui/material/Typography';
 import CardPackage from '../commons/CardPackage.jsx';
-import usuariosFake from '../statics/DummyData/usuariosFake';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 
 const HistorialPackages = () => {
+  const publicUrl = process.env.REACT_APP_URL_BACKEND;
+  let packetHistory = [];
+  let totalPacketHistory = 0;
+
+  useEffect(() => {
+    axios
+      .get(`${publicUrl}orders/`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        packetHistory = response;
+        totalPacketHistory = packetHistory.length;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
   return (
     <>
       <FullAccordion title={'Historial de repartos'}>
         <Typography variant="body2" gutterBottom>
-          Ya repartiste {usuariosFake[0].totalPaquetesEntregados} paquetes
+          Ya repartiste {totalPacketHistory} paquetes
         </Typography>
-        {usuariosFake[0].paquetesEntregados[0] ? (
-          usuariosFake[0].paquetesEntregados.map((data, i) => {
+        {packetHistory ? (
+          packetHistory.map((data, i) => {
             return (
               <CardPackage
                 direccion={data.direccion}

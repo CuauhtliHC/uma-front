@@ -33,12 +33,16 @@ const funcLogin = async (
 
   if (Object.keys(errors).length === 0) {
     try {
-      const response = await axios.post(`${publicUrl}login`, {
-        email,
-        password,
-      }, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${publicUrl}login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
       const user = response.data.payload;
       cookies.set('token', cookies.get('token'), { path: '/' });
       setUser({
@@ -58,6 +62,7 @@ const funcLogin = async (
         token: user.token,
       });
     } catch (error) {
+      console.log(error);
       setOpen(false);
       let messageError;
       if (error.response.status === 404 || error.response.status === 400) {
