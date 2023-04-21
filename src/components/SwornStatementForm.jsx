@@ -10,12 +10,15 @@ import {
   Typography,
 } from '@mui/material';
 import axios from 'axios';
+import { useSetRecoilState } from 'recoil';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
+import { user } from '../state/user.jsx';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
 const SwornStatementForm = () => {
   const navigate = useNavigate();
+  const setDdjj = useSetRecoilState(user);
 
   const {
     register,
@@ -42,6 +45,9 @@ const SwornStatementForm = () => {
       })
       .then((response) => {
         console.log(response);
+        setDdjj({
+          ddjj: { status: response.data.dateSwornStatement.aceppt },
+        });
         navigate('/iniciar_jornada');
       })
       .catch((error) => {
