@@ -13,13 +13,19 @@ const Workday = () => {
   const toGetPackage = () => {
     navigate('/obtener_paquete');
   };
+
   return (
     <>
-    { dataUser.ddjj.status ? (<BlueLargeButton handleSubmit={toGetPackage}>
-        OBTENER PAQUETES
-      </BlueLargeButton>) : (<Alert variant="filled" severity="error">
-        Usted no está en condiciones de trabajar hoy. Descance y vuelva mañana.
-      </Alert>) }
+      {dataUser.ddjj.status ? (
+        <BlueLargeButton handleSubmit={toGetPackage}>
+          OBTENER PAQUETES
+        </BlueLargeButton>
+      ) : (
+        <Alert variant="filled" severity="error">
+          Usted no está en condiciones de trabajar hoy. Descance y vuelva
+          mañana.
+        </Alert>
+      )}
       <PendingPackages />
       <HistorialPackages />
     </>
