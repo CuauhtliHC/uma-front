@@ -1,21 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import usuariosFake from '../statics/DummyData/usuariosFake';
+import axios from 'axios';
+// import usuariosFake from '../statics/DummyData/usuariosFake';
 import CardPackage from '../commons/CardPackage.jsx';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 
 const PendingPackages = () => {
+  const publicUrl = process.env.REACT_APP_URL_BACKEND;
+  let pendingPackages = [];
+  let totalPendingPackages = 0;
+
+  useEffect(() => {
+    axios
+      .get(`${publicUrl}orders/?statusOrder=PENDING`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        pendingPackages = response;
+        totalPendingPackages = pendingPackages.length;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
+
   return (
     <>
       <FullAccordion title="Repartos pendientes">
-        {usuariosFake[0].paquetesPendientes ? (
+        {pendingPackages ? (
           <>
             <Typography>
-              Tenes {usuariosFake[0].totalPaquetesPendientes} paquetes
+              Tenes {totalPendingPackages} paquetes
               pendientes
             </Typography>
-            {usuariosFake[0].paquetesPendientes.map((data, i) => {
+            {pendingPackages.map((data, i) => {
               return (
                 <Link
                   to={`/obtener_paquete/${data.id}`}

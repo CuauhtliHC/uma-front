@@ -1,16 +1,19 @@
 import React from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   BlueBoxDate,
   YellowBoxDate,
 } from '../../statics/styles/manageSchedule/carrousel/carrousel.jsx';
 
-const BoxDate = ({ day, children }) => {
+const BoxDate = ({ dayDescription, children }) => {
+  const { day } = useParams();
+  const navigate = useNavigate();
   return (
     <>
-      {day.today ? (
+      {dayDescription.formatDate === day ? (
         <YellowBoxDate>{children}</YellowBoxDate>
       ) : (
-        <BlueBoxDate>{children}</BlueBoxDate>
+        <BlueBoxDate onClick={() => navigate(`/gestionar_agenda/${dayDescription.formatDate}`)}>{children}</BlueBoxDate>
       )}
     </>
   );

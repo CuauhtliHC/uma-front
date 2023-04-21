@@ -1,64 +1,82 @@
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 import { emailRegex } from './regex.jsx';
-import usuariosFake from '../../statics/DummyData/usuariosFake';
+
+const publicUrl = process.env.REACT_APP_URL_BACKEND;
+const cookies = new Cookies();
 
 const validate = (email, password) => {
-  const errores = {};
+  const errors = {};
   if (!email || email === '') {
-    errores.email = 'El campo Email es obligatorio';
+    errors.email = 'El campo Email es obligatorio';
   } else if (!emailRegex.test(email)) {
-    errores.email = 'El campo Email no es válido';
+    errors.email = 'El campo Email no es válido';
   }
 
   if (!password || password === '') {
-    errores.password = 'El campo Contraseña es obligatorio';
+    errors.password = 'El campo Contraseña es obligatorio';
   }
-  return errores;
+  return errors;
 };
 
-const funcLogin = (
+const funcLogin = async (
   email,
   setOpen,
   setMessage,
   password,
   setUser,
   saveState,
-  navigate,
   setErrors,
 ) => {
-  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
-  const VerificateForm = validate(email, emailRegex, password);
-  setErrors(VerificateForm);
-  if (
-    !dataEmails.find((element) => element === email)
-    && Object.keys(VerificateForm).length === 0
-  ) {
-    setOpen(false);
-    setMessage({
-      description: 'Esta mail no se encuentra registrado',
-      title: 'Error',
-      status: 'error',
-    });
-    setOpen(true);
-  } else if (
-    emailRegex.test(email)
-    && Object.keys(VerificateForm).length === 0
-    && password === 'Plataforma5@'
-  ) {
-    setUser({ id: 1, email: 'cuau_daali@hotmail.com', isAdmin: false });
-    saveState({ id: 1, email: 'cuau_daali@hotmail.com', isAdmin: false });
-    navigate('/iniciar_jornada');
-  } else if (
-    dataEmails.find((element) => element === email)
-    && Object.keys(VerificateForm).length === 0
-    && password !== 'Plataforma5@'
-  ) {
-    setOpen(false);
-    setMessage({
-      description: 'Contraseña incorrecta',
-      title: 'Error',
-      status: 'error',
-    });
-    setOpen(true);
+  const errors = validate(email, password);
+  setErrors(errors);
+
+  if (Object.keys(errors).length === 0) {
+    try {
+      const response = await axios.post(
+        `${publicUrl}login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      );
+      const user = response.data.payload;
+      cookies.set('token', cookies.get('token'), { path: '/' });
+      setUser({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.rol,
+        ddjj: user.ddjj,
+        token: user.token,
+      });
+      saveState({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.rol,
+        ddjj: user.ddjj,
+        token: user.token,
+      });
+    } catch (error) {
+      console.log(error);
+      setOpen(false);
+      let messageError;
+      if (error.response.status === 404 || error.response.status === 400) {
+        messageError = error.response.data.msg;
+      } else {
+        messageError = 'Credenciales incorrectas';
+      }
+      setMessage({
+        description: messageError,
+        title: 'Error',
+        status: 'error',
+      });
+      setOpen(true);
+    }
   }
 };
 

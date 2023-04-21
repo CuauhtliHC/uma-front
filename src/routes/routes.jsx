@@ -17,13 +17,15 @@ import AddPacketAdmin from '../pages/AddPacketAdmin/AddPacketAdmin.jsx';
 import Error404 from '../pages/Error404.jsx';
 import DealerDetail from '../pages/DealerDetail.jsx';
 import ManagePackages from '../pages/ManagePackages.jsx';
+import ResetPassword from '../pages/ResetPassword.jsx';
+import SwornStatement from '../pages/SwornStatement.jsx';
 
 const Links = () => {
   const dataUser = useRecoilValue(user);
   return (
     <Routes>
       <Route exact path="/" element={<Navigate to="/login" replace />} />
-      <Route exact path="/gestionar_agenda" element={<ManageSchedule />} />
+      <Route exact path="/gestionar_agenda/:day" element={<ManageSchedule />} />
       <Route
         exact
         path="/gestionar_repartidores"
@@ -36,6 +38,7 @@ const Links = () => {
       />
       <Route path="*" element={<Error404 />} />
       <Route exact path="/gestionar_paquetes" element={<ManagePackages />} />
+      <Route exact path="/ddjj" element={<SwornStatement />} />
         <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       <Route element={<ProtectedRoute user={dataUser} />}>
         <Route exact path="/mi_perfil" element={<Profile />} />
@@ -55,6 +58,7 @@ const Links = () => {
           path="/recuperar_contraseña"
           element={<RestorePassword />}
         />
+        <Route exact path="/resetPassword/:token" element={<ResetPassword />} />
       </Route>
     </Routes>
   );

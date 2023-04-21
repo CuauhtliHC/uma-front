@@ -6,6 +6,7 @@ import {
 } from '../../statics/styles/button/blueButton.jsx';
 import HeaderAddPackageAdmin from '../../components/HeaderAddPackageAdmin.jsx';
 import FormAddPackage from '../../components/FormAddPackage.jsx';
+import { functCreatePkg } from '../../utils/forms/createPackage.jsx';
 
 const AddPacketAdmin = () => {
   const [formValue, setFormValue] = useState({
@@ -37,6 +38,7 @@ const AddPacketAdmin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    functCreatePkg(formValue);
   };
   return (
     <>
