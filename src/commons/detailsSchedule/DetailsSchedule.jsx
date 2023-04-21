@@ -15,7 +15,7 @@ const DetailsSchedule = ({
   return (
     <>
       <BoxMain>
-        {progress && <ProgressCircle progress={progress} />}
+        <ProgressCircle progress={progress} />
         <BoxDetails>
           <TittleAccordion>{title}</TittleAccordion>
           <TypographyDetails>{description}</TypographyDetails>
