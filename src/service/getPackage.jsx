@@ -1,0 +1,26 @@
+import axios from 'axios';
+
+const publicUrl = process.env.REACT_APP_URL_BACKEND;
+
+axios.defaults.withCredentials = true;
+
+const functGetPackageForUser = async (setData) => {
+  try {
+    const response = await axios.get(`${publicUrl}package/today`);
+    setData(response.data.datePackageToday);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const createOrder = async (list) => {
+  try {
+    axios.post(`${publicUrl}orders/create/`, {
+      list,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { functGetPackageForUser, createOrder };

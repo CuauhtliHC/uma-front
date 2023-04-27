@@ -41,6 +41,7 @@ const functResetPass = (
           title: 'Exito',
           status: 'success',
         });
+        console.log(res);
         setOpen(true);
       })
       .catch((error) => {
@@ -49,6 +50,7 @@ const functResetPass = (
           title: 'Error',
           status: 'error',
         });
+        console.log(error);
         setOpen(true);
       });
   }
