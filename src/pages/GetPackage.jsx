@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import AddPackage from '../commons/AddPackage.jsx';
-import packageFake from '../statics/DummyData/packagesFake';
 import BlueLargeButton from '../commons/buttons/BlueLargeButton.jsx';
 import BackButton from '../commons/buttons/BackButton.jsx';
 import {
@@ -13,19 +12,26 @@ import {
 } from '../statics/styles/getPackage/title.jsx';
 import { listPackage } from '../state/addingPackage.jsx';
 import MoreButton from '../commons/buttons/MoreButton.jsx';
+import { createOrder, functGetPackageForUser } from '../service/getPackage.jsx';
+import { user } from '../state/user.jsx';
 
 const GetPackage = () => {
+  const dataUser = useRecoilValue(user);
   const navigate = useNavigate();
-  const { total } = useRecoilValue(listPackage);
+  const { total, list } = useRecoilValue(listPackage);
   const [data, setData] = useState(null);
   const [maxPackage, setMaxPackage] = useState(3);
+
   useEffect(() => {
-    setData(packageFake);
+    functGetPackageForUser(setData);
   }, []);
+
   const backToViewStart = () => {
     navigate('/iniciar_jornada');
   };
+
   const startJornada = () => {
+    createOrder(list, dataUser);
     navigate('/iniciar_jornada');
   };
 
@@ -53,8 +59,8 @@ const GetPackage = () => {
                 <AddPackage
                   key={i}
                   id={dataPackage.id}
-                  direction={dataPackage.direction}
-                  maxQuantity={dataPackage.maxQuantity}
+                  direction={dataPackage.address}
+                  maxQuantity={dataPackage.quantityRest}
                 />
               );
             })}
