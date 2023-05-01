@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { emailRegex } from './regex.jsx';
-import usuariosFake from '../../statics/DummyData/usuariosFake';
+
+const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
 const validate = (email) => {
   const errores = {};
@@ -11,32 +13,30 @@ const validate = (email) => {
   return errores;
 };
 
-const funcRestorePass = (setErrors, setOpen, setMessage, email) => {
-  const dataEmails = usuariosFake.map((dataUser) => dataUser.email);
+const funcRestorePass = async (setErrors, setOpen, setMessage, email) => {
   const VerificateForm = validate(email);
   setErrors(VerificateForm);
-  if (
-    !dataEmails.find((element) => element === email)
-      && Object.keys(VerificateForm).length === 0
-  ) {
-    setOpen(false);
-    setMessage({
-      description: 'Esta mail no se encuentra registrado',
-      title: 'Error',
-      status: 'error',
-    });
-    setOpen(true);
-  } else if (
-    emailRegex.test(email)
-      && Object.keys(VerificateForm).length === 0
-  ) {
-    setOpen(false);
-    setMessage({
-      description: `Se envio un correo a ${email}`,
-      title: 'Exito',
-      status: 'success',
-    });
-    setOpen(true);
+  if (Object.keys(VerificateForm).length === 0) {
+    try {
+      const response = await axios.put(`${publicUrl}users/forgotPassword`, { email });
+      console.log(response);
+      setOpen(false);
+      setMessage({
+        description: `Se envio un correo a ${email}`,
+        title: 'Exito',
+        status: 'success',
+      });
+      setOpen(true);
+    } catch (error) {
+      const { errors } = error.response.data;
+      setOpen(false);
+      setMessage({
+        description: errors[0].msg,
+        title: 'Error',
+        status: 'error',
+      });
+      setOpen(true);
+    }
   }
 };
 

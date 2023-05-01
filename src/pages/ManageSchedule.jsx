@@ -34,7 +34,7 @@ const ManageSchedule = () => {
       title: 'Paquetes',
       description:
         total === 0 || null ? 'No hay paquetes a repartir' : `${totalSent}/${total} repartidos`,
-      route: '/gestionar_paquetes',
+      route: `/gestionar_paquetes/${day}`,
     },
   ];
   return (
