@@ -37,7 +37,7 @@ const Links = () => {
         element={<DealerDetail />}
       />
       <Route path="*" element={<Error404 />} />
-      <Route exact path="/gestionar_paquetes" element={<ManagePackages />} />
+      <Route exact path="/gestionar_paquetes/:day" element={<ManagePackages />} />
       <Route exact path="/ddjj" element={<SwornStatement />} />
         <Route exact path="/addPacket" element={<AddPacketAdmin />} />
       <Route element={<ProtectedRoute user={dataUser} />}>

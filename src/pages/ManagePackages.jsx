@@ -1,14 +1,20 @@
-import React from 'react';
-import { useNavigate } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
 import BackButton from '../commons/buttons/BackButton.jsx';
 import CardPackage from '../commons/CardPackage.jsx';
-import usuariosFake from '../statics/DummyData/usuariosFake';
 import ButtonBlueAdd from '../commons/buttons/ButtonBlueAdd.jsx';
 import { dateFormat } from '../utils/today.jsx';
+import { funcGetAllPackageDay, funcGetStatus } from '../service/getPackageAdmin.jsx';
 
 const ManagePackages = () => {
+  const { day } = useParams();
   const navigate = useNavigate();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    funcGetAllPackageDay(day, setData);
+  }, [day]);
   const BackToAgenda = () => {
     navigate(`/gestionar_agenda/${dateFormat}`);
   };
@@ -18,19 +24,20 @@ const ManagePackages = () => {
   return (
     <>
       <BackButton handleSubmit={BackToAgenda} />
-      <FullAccordion title={'Paquetes'} subtitle={'Hay 523 paquetes'}>
-        {usuariosFake[0].paquetesPendientes[0]
-          && usuariosFake[0].paquetesPendientes.map((data, i) => {
+      {data && (
+        <FullAccordion title={'Paquetes'} subtitle={`Hay ${data.total} paquetes`}>
+          {data.all.map((pkg, i) => {
             return (
               <CardPackage
-                direccion={data.direccion}
-                estado={data.estado}
-                id={data.id}
+                direccion={pkg.InProgressOrder ? pkg.Package.address : pkg.address}
+                estado={funcGetStatus(pkg)}
+                id={pkg.id}
                 key={i}
               />
             );
           })}
-      </FullAccordion>
+        </FullAccordion>
+      )}
       <ButtonBlueAdd handleSubmit={NavigateToAddPackage} />
     </>
   );

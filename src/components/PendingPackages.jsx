@@ -1,40 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
-// import usuariosFake from '../statics/DummyData/usuariosFake';
 import CardPackage from '../commons/CardPackage.jsx';
 import FullAccordion from '../commons/accordion/FullAccordion.jsx';
+import { getOrdersUser } from '../service/getOrderUser.jsx';
+import { funcGetStatus } from '../service/getPackageAdmin.jsx';
 
 const PendingPackages = () => {
-  const publicUrl = process.env.REACT_APP_URL_BACKEND;
-  let pendingPackages = [];
-  let totalPendingPackages = 0;
+  const [orders, setOrders] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`${publicUrl}orders/?statusOrder=PENDING`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        pendingPackages = response;
-        totalPendingPackages = pendingPackages.length;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
+    getOrdersUser(setOrders);
+  }, []);
 
   return (
     <>
       <FullAccordion title="Repartos pendientes">
-        {pendingPackages ? (
+        {orders ? (
           <>
             <Typography>
-              Tenes {totalPendingPackages} paquetes
+              Tenes {orders.total} paquetes
               pendientes
             </Typography>
-            {pendingPackages.map((data, i) => {
+            {orders.info.map((data, i) => {
               return (
                 <Link
                   to={`/obtener_paquete/${data.id}`}
@@ -45,8 +33,8 @@ const PendingPackages = () => {
                   key={i}
                 >
                   <CardPackage
-                    direccion={data.direccion}
-                    estado={data.estado}
+                    direccion={data.Package.address}
+                    estado={funcGetStatus(data)}
                     id={data.id}
                   />
                 </Link>

@@ -1,0 +1,7 @@
+{
+    "status": {
+    "PENDING": "Pendiente",
+    "IN_PROGRESS": "En viaje",
+    "FINISHED": "Entregado",
+    "CANCELLED": "Cancelado"}
+}
