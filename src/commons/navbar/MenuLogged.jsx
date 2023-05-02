@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { user } from '../../state/user.jsx';
-import avatarImg from '../../statics/images/avatar.png';
+import perfilDelivery from '../../statics/images/delivery.jpg';
+import perfilAdmin from '../../statics/images/admin.jpg';
 import {
   AvatarNavBar,
   IconButtonAvatar,
@@ -15,6 +16,7 @@ import {
 const MenuLogged = () => {
   const navigate = useNavigate();
   const setUser = useSetRecoilState(user);
+  const dataUser = useRecoilValue(user);
   const settings = [
     { name: 'Perfil', link: '/mi_perfil' },
     { name: 'Cerrar Sesion', link: '/logout' },
@@ -37,7 +39,7 @@ const MenuLogged = () => {
     <>
       <Tooltip title="Open settings">
         <IconButtonAvatar onClick={handleOpenUserMenu}>
-          <AvatarNavBar alt="foto de perfil" src={avatarImg} />
+          <AvatarNavBar alt="foto de perfil" src={dataUser.isAdmin === 'ADMIN_ROL' ? perfilAdmin : perfilDelivery} />
         </IconButtonAvatar>
       </Tooltip>
       <MenuNavBar

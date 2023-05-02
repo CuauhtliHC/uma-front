@@ -1,4 +1,5 @@
 import axios from 'axios';
+import statusUsers from '../utils/statusUser.json';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
@@ -13,4 +14,8 @@ const functGetDataUserById = async (id, setDataUser) => {
   }
 };
 
-export { functGetDataUserById };
+const statusUser = (status) => {
+  return statusUsers.status[status];
+};
+
+export { functGetDataUserById, statusUser };

@@ -13,8 +13,14 @@ import {
   StatusTypography,
 } from '../statics/styles/cardPackage.jsx';
 import { changeImg } from '../utils/changeColorPackage.jsx';
+import { deleteOrderOrPkg } from '../service/getPackage.jsx';
 
-const Card = ({ direccion, estado }) => {
+const Card = ({
+  direccion, estado, inProgress, id,
+}) => {
+  const deletePkg = () => {
+    deleteOrderOrPkg(id, inProgress);
+  };
   return (
     <MainBoxCard>
       <Grid container spacing={2}>
@@ -29,11 +35,13 @@ const Card = ({ direccion, estado }) => {
           </Grid>
           <Grid item xs={4}>
             <GridRightContainer container spacing={2}>
-              <GridRightItem item>
-                <IconButton edge="end" aria-label="delete">
+              {(estado === 'Pendiente')
+                && <GridRightItem item>
+                <IconButton edge="end" aria-label="delete" onClick={deletePkg}>
                   <DeleteIcon />
                 </IconButton>
               </GridRightItem>
+              }
               <Grid item>
                 <StatusTypography
                   gutterBottom

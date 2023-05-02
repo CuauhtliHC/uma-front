@@ -32,6 +32,7 @@ const ManagePackages = () => {
                 direccion={pkg.InProgressOrder ? pkg.Package.address : pkg.address}
                 estado={funcGetStatus(pkg)}
                 id={pkg.id}
+                inProgress={pkg.InProgressOrder}
                 key={i}
               />
             );

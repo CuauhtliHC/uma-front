@@ -23,4 +23,14 @@ const createOrder = async (list) => {
   }
 };
 
-export { functGetPackageForUser, createOrder };
+const deleteOrderOrPkg = async (id, inProgress) => {
+  let url = 'package/';
+  if (inProgress) url = 'orders/delete/';
+  try {
+    axios.delete(`${publicUrl}${url}${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { functGetPackageForUser, createOrder, deleteOrderOrPkg };
