@@ -35,7 +35,6 @@ const Profile = () => {
       <SecondGrid container spacing={2} direction="column">
         <Grid item xs={12}>
           <Typography style={{ color: '#1976d2' }}>
-            {' '}
             {dataUser.name.toUpperCase()}
           </Typography>
         </Grid>

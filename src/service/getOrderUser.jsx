@@ -4,18 +4,18 @@ const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
 axios.defaults.withCredentials = true;
 
-const getOrdersUser = async (setOrders) => {
+const getOrdersUser = async (setOrders, idUser) => {
   try {
-    const response = await axios.get(`${publicUrl}orders/?statusOrder=PENDING`);
+    const response = await axios.get(`${publicUrl}orders/byUser/${idUser}?statusOrder=PENDING`);
     setOrders(response.data);
   } catch (error) {
     console.log(error);
   }
 };
 
-const getHistoryUser = async (setHistory) => {
+const getHistoryUser = async (setHistory, idUser) => {
   try {
-    const response = await axios.get(`${publicUrl}orders/`);
+    const response = await axios.get(`${publicUrl}orders/byUser/${idUser}`);
     setHistory(response.data);
   } catch (error) {
     console.log(error);

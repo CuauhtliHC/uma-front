@@ -7,6 +7,7 @@ import {
 import HeaderAddPackageAdmin from '../../components/HeaderAddPackageAdmin.jsx';
 import FormAddPackage from '../../components/FormAddPackage.jsx';
 import { functCreatePkg } from '../../utils/forms/createPackage.jsx';
+import AlertMessage from '../../commons/AlertMessage.jsx';
 
 const AddPacketAdmin = () => {
   const [formValue, setFormValue] = useState({
@@ -18,6 +19,8 @@ const AddPacketAdmin = () => {
   });
   const [isFormCompleted, setIsFormCompleted] = useState(false);
   const [isFormAddress, setIsFormAddress] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     if (
@@ -38,11 +41,12 @@ const AddPacketAdmin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    functCreatePkg(formValue);
+    functCreatePkg(formValue, setOpen, setMessage);
   };
   return (
     <>
       <HeaderAddPackageAdmin />
+      <AlertMessage open={open} message={message} setOpen={setOpen} />
       <FormAddPackage
         formValue={formValue}
         setFormValue={setFormValue}

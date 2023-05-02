@@ -10,7 +10,6 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import BackButton from '../commons/buttons/BackButton.jsx';
 import PendingPackages from '../components/PendingPackages.jsx';
 import HistorialPackages from '../components/HistorialPackages.jsx';
-import repartidoresFake from '../statics/DummyData/repartidoresFake';
 import { handleColorStatus } from '../utils/circleProgressFunctions.jsx';
 import {
   GridButtonActive,
@@ -19,15 +18,14 @@ import {
   TypographyName,
 } from '../statics/styles/dealerDetailStyle.jsx';
 import { AvatarDistributorCard } from '../statics/styles/distributors/distributorsCardStyle.jsx';
-import { functGetDataUserById } from '../service/dataUser.jsx';
+import { functGetDataUserById, statusUser } from '../service/dataUser.jsx';
+import perfilDelivery from '../statics/images/delivery.jpg';
 
 const DealerDetail = () => {
   const [dataUser, setDataUser] = useState(null);
   const params = useParams();
   const idDealer = params.id;
-  const idArray = idDealer - 1;
-  const estado = repartidoresFake[idArray].status;
-  const fotoPerfil = repartidoresFake[idArray].img;
+  const fotoPerfil = perfilDelivery;
 
   useEffect(() => {
     functGetDataUserById(idDealer, setDataUser);
@@ -52,13 +50,13 @@ const DealerDetail = () => {
                 <Typography
                   variant="subtitle2"
                   fontSize={15}
-                  color={handleColorStatus(estado)}
+                  color={handleColorStatus(statusUser(dataUser.StatusUsers.status))}
                 >
                   <FiberManualRecordIcon
                     fontSize="small"
-                    color={handleColorStatus(estado)}
+                    color={handleColorStatus(statusUser(dataUser.StatusUsers.status))}
                   />
-                  {estado}
+                  {statusUser(dataUser.StatusUsers.status)}
                 </Typography>
               </Grid>
               <GridButtonActive item xs={1}>

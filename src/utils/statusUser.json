@@ -1,0 +1,6 @@
+{
+    "status": {
+    "IN_PROGRESS": "Viaje en curso",
+    "FINISHED": "Finalizó",
+    "INACTIVE": "Inactivo"}
+}
