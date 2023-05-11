@@ -1,9 +1,7 @@
 import axios from 'axios';
-import Cookies from 'universal-cookie';
 import { emailRegex } from './regex.jsx';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
-const cookies = new Cookies();
 
 const validate = (email, password) => {
   const errors = {};
@@ -27,6 +25,7 @@ const funcLogin = async (
   setUser,
   saveState,
   setErrors,
+  saveToken,
 ) => {
   const errors = validate(email, password);
   setErrors(errors);
@@ -39,12 +38,9 @@ const funcLogin = async (
           email,
           password,
         },
-        {
-          withCredentials: true,
-        },
       );
       const user = response.data.payload;
-      cookies.set('token', cookies.get('token'), { path: '/' });
+      saveToken(response.data.token);
       setUser({
         id: user.id,
         name: user.name,
@@ -63,19 +59,19 @@ const funcLogin = async (
       });
     } catch (error) {
       console.log(error);
-      setOpen(false);
-      let messageError;
-      if (error.response.status === 404 || error.response.status === 400) {
-        messageError = error.response.data.msg;
-      } else {
-        messageError = 'Credenciales incorrectas';
-      }
-      setMessage({
-        description: messageError,
-        title: 'Error',
-        status: 'error',
-      });
-      setOpen(true);
+      // setOpen(false);
+      // let messageError;
+      // if (error.response.status === 404 || error.response.status === 400) {
+      //   messageError = error.response.data.msg;
+      // } else {
+      //   messageError = 'Credenciales incorrectas';
+      // }
+      // setMessage({
+      //   description: messageError,
+      //   title: 'Error',
+      //   status: 'error',
+      // });
+      // setOpen(true);
     }
   }
 };

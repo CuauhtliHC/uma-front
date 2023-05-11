@@ -16,3 +16,11 @@ export function loadState() {
     return undefined;
   }
 }
+
+export function saveToken(token) {
+  try {
+    localStorage.setItem('token', token);
+  } catch (e) {
+    console.error(e);
+  }
+}
