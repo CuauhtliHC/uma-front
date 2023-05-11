@@ -2,11 +2,17 @@ import axios from 'axios';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
-axios.defaults.withCredentials = true;
-
 const functGetDistributors = async (showCount, setDataUsers) => {
   try {
-    const response = await axios.get(`${publicUrl}users/getAllUsers/${showCount}`);
+    const response = await axios.get(
+      `${publicUrl}users/getAllUsers/${showCount}`,
+      {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          token: localStorage.getItem('token'),
+        },
+      },
+    );
     setDataUsers(response.data);
   } catch (error) {
     console.log(error);

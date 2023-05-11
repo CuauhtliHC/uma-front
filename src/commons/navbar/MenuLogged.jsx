@@ -27,6 +27,7 @@ const MenuLogged = () => {
     setAnchorElUser(null);
     if (setting.name === 'Cerrar Sesion') {
       localStorage.removeItem('User');
+      localStorage.removeItem('token');
       setUser(null);
       navigate('/login');
     } else if (setting.name === 'Perfil') {

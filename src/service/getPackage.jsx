@@ -2,11 +2,14 @@ import axios from 'axios';
 
 const publicUrl = process.env.REACT_APP_URL_BACKEND;
 
-axios.defaults.withCredentials = true;
-
 const functGetPackageForUser = async (setData) => {
   try {
-    const response = await axios.get(`${publicUrl}package/today`);
+    const response = await axios.get(`${publicUrl}package/today`, {
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        token: localStorage.getItem('token'),
+      },
+    });
     setData(response.data.datePackageToday);
   } catch (error) {
     console.log(error);
@@ -15,9 +18,18 @@ const functGetPackageForUser = async (setData) => {
 
 const createOrder = async (list) => {
   try {
-    axios.post(`${publicUrl}orders/create/`, {
-      list,
-    });
+    axios.post(
+      `${publicUrl}orders/create/`,
+      {
+        list,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          token: localStorage.getItem('token'),
+        },
+      },
+    );
   } catch (error) {
     console.log(error);
   }

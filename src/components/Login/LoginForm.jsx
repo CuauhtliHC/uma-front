@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import AlertMessage from '../../commons/AlertMessage.jsx';
 import { user } from '../../state/user.jsx';
-import { saveState } from '../../utils/browserStorage.jsx';
+import { saveState, saveToken } from '../../utils/browserStorage.jsx';
 import InputsForm from '../../commons/InputsForm.jsx';
 import BlueLargeButton from '../../commons/buttons/BlueLargeButton.jsx';
 import { funcLogin } from '../../utils/forms/login.jsx';
@@ -34,6 +34,7 @@ const LoginForm = () => {
       setUser,
       saveState,
       setErrors,
+      saveToken,
     );
   };
 
