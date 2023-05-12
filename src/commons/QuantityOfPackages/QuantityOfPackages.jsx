@@ -17,7 +17,9 @@ const QuantityOfPackages = () => {
   };
 
   const addQuantity = () => {
-    setQuantity(quantity + 1);
+    if (quantity < 10) {
+      setQuantity(quantity + 1);
+    }
   };
 
   return (

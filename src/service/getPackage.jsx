@@ -8,6 +8,7 @@ const functGetPackageForUser = async (setData) => {
   try {
     const response = await axios.get(`${publicUrl}package/today`);
     setData(response.data.datePackageToday);
+    console.log(response);
   } catch (error) {
     console.log(error);
   }
@@ -23,6 +24,14 @@ const createOrder = async (list) => {
   }
 };
 
+const finishOrder = async (id, status) => {
+  try {
+    axios.put(`${publicUrl}orders/status/${status}/${id}/`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const deleteOrderOrPkg = async (id, inProgress) => {
   let url = 'package/';
   if (inProgress) url = 'orders/delete/';
@@ -33,4 +42,6 @@ const deleteOrderOrPkg = async (id, inProgress) => {
   }
 };
 
-export { functGetPackageForUser, createOrder, deleteOrderOrPkg };
+export {
+  functGetPackageForUser, createOrder, deleteOrderOrPkg, finishOrder,
+};

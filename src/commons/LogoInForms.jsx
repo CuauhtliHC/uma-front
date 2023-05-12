@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../statics/images/logo.svg';
+import Logo from '../statics/images/logoFastDelivery.png';
 import { BoxImage, ImageLogo } from '../statics/styles/logoStyle.jsx';
 
 const LogoInForms = () => {

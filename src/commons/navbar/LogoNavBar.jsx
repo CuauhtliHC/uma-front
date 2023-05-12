@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router';
 import { useRecoilValue } from 'recoil';
 import { ImgLogoNavBar } from '../../statics/styles/navbarStyle.jsx';
-import logoFD from '../../statics/images/logoFastDelivery.jpeg';
+import logoFD from '../../statics/images/iconoLogo.png';
 import { user } from '../../state/user.jsx';
 import { dateFormat } from '../../utils/today.jsx';
 

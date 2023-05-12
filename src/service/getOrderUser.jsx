@@ -13,6 +13,15 @@ const getOrdersUser = async (setOrders, idUser) => {
   }
 };
 
+const getOrderEnviando = async (setPendiente, idUser) => {
+  try {
+    const response = await axios.get(`${publicUrl}orders/byUser/${idUser}?statusOrder=IN_PROGRESS`);
+    setPendiente(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getHistoryUser = async (setHistory, idUser) => {
   try {
     const response = await axios.get(`${publicUrl}orders/byUser/${idUser}`);
@@ -22,4 +31,4 @@ const getHistoryUser = async (setHistory, idUser) => {
   }
 };
 
-export { getOrdersUser, getHistoryUser };
+export { getOrdersUser, getHistoryUser, getOrderEnviando };

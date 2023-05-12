@@ -44,7 +44,6 @@ const SwornStatementForm = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log(response);
         setDdjj({
           ddjj: { status: response.data.dateSwornStatement.aceppt },
         });

@@ -59,6 +59,17 @@ const ButtonFinish = styled(Button)({
   fontSize: '15px',
 });
 
+const CancelledButton = styled(Button)({
+  padding: '2px 16px',
+  backgroundColor: '#F3C54F',
+  color: 'white',
+  boxShadow:
+    '0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)',
+  borderRadius: '4px',
+  fontWeight: 500,
+  fontSize: '15px',
+});
+
 const containerStyle = {
   position: 'relative',
   width: '75vw',
@@ -77,4 +88,5 @@ export {
   BoxButton,
   ButtonFinish,
   containerStyle,
+  CancelledButton,
 };
