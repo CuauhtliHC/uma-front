@@ -19,7 +19,7 @@ const functGetPackageForUser = async (setData) => {
 
 const createOrder = async (list) => {
   try {
-    axios.post(
+    return axios.post(
       `${publicUrl}orders/create/`,
       {
         list,

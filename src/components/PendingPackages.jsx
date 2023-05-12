@@ -20,6 +20,7 @@ const PendingPackages = () => {
     getOrderEnviando(setPendiente, idUser);
     getOrdersUser(setOrders, idUser);
   }, []);
+  const rolUser = dataUser.isAdmin;
 
   return (
     <>
@@ -40,6 +41,8 @@ const PendingPackages = () => {
                     direccion={data.Package.address}
                     estado={funcGetStatus(data)}
                     id={data.id}
+                    rolUser = {rolUser}
+
                   />
                 </Link>
               );

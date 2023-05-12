@@ -16,7 +16,6 @@ import { createOrder, functGetPackageForUser } from '../service/getPackage.jsx';
 import { user } from '../state/user.jsx';
 
 const GetPackage = () => {
-  const dataUser = useRecoilValue(user);
   const navigate = useNavigate();
   const { total, list } = useRecoilValue(listPackage);
   const [data, setData] = useState(null);
@@ -30,15 +29,14 @@ const GetPackage = () => {
     navigate('/iniciar_jornada');
   };
 
-  const startJornada = () => {
-    createOrder(list, dataUser);
+  const startJornada = async () => {
+    createOrder(list);
     navigate('/iniciar_jornada');
   };
 
   const more = () => {
     setMaxPackage(maxPackage + 3);
   };
-  console.log(list);
 
   return (
     <>
@@ -55,14 +53,16 @@ const GetPackage = () => {
         )}
         {data ? (
           <>
-            {data.slice(0, maxPackage).map((dataPackage, i) => {
-              return (
+            {data.slice(0, maxPackage).map((dataPackage) => {
+              return dataPackage.quantityInOrders <= dataPackage.quantityOfPackages ? (
                 <AddPackage
-                  key={i}
+                  key={dataPackage.id}
                   id={dataPackage.id}
                   direction={dataPackage.address}
                   maxQuantity={dataPackage.quantityRest}
                 />
+              ) : (
+                <></>
               );
             })}
             {maxPackage < data.length && <MoreButton more={more} />}
