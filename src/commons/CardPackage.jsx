@@ -16,7 +16,7 @@ import { changeImg } from '../utils/changeColorPackage.jsx';
 import { deleteOrderOrPkg } from '../service/getPackage.jsx';
 
 const Card = ({
-  direccion, estado, inProgress, id,
+  direccion, estado, inProgress, id, rolUser,
 }) => {
   const deletePkg = () => {
     deleteOrderOrPkg(id, inProgress);
@@ -35,7 +35,7 @@ const Card = ({
           </Grid>
           <Grid item xs={4}>
             <GridRightContainer container spacing={2}>
-              {(estado === 'Pendiente')
+              {(estado === 'Pendiente' && rolUser === 'ADMIN_ROL')
                 && <GridRightItem item>
                 <IconButton edge="end" aria-label="delete" onClick={deletePkg}>
                   <DeleteIcon />
