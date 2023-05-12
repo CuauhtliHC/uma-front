@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router';
 import {
   AvatarProfile,
   BoxButton,
@@ -15,11 +16,15 @@ import { user } from '../state/user.jsx';
 import perfilDelivery from '../statics/images/delivery.jpg';
 import perfilAdmin from '../statics/images/admin.jpg';
 import Loader from '../components/Loader.jsx';
+import { funcDisableUserById } from '../service/disableUser.jsx';
 
 const Profile = () => {
   const dataUser = useRecoilValue(user);
+  const setUser = useSetRecoilState(user);
+  const navigate = useNavigate();
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [loadingUpdate, setLoadingUpdate] = useState(false);
+  console.log(dataUser.id);
   return (
     <>
       <PrincipalGrid container spacing={2}>
@@ -51,7 +56,7 @@ const Profile = () => {
         </Grid>
       </SecondGrid>
       <BoxButton>
-        <div style={{ position: 'relative' }}>
+        {/* <div style={{ position: 'relative' }}>
           {loadingUpdate ? (
             <div
               style={{
@@ -71,7 +76,7 @@ const Profile = () => {
               EDITAR PERFIL
             </Button>
           )}
-        </div>
+        </div> */}
 
         <div style={{ position: 'relative' }}>
           {loadingDelete ? (
@@ -97,7 +102,13 @@ const Profile = () => {
                   color: '#ffffff',
                 },
               }}
-              onClick={() => setLoadingDelete(!loadingDelete)}>
+              onClick={() => {
+                setLoadingDelete(!loadingDelete);
+                funcDisableUserById(dataUser.id).then(() => {
+                  setUser(null);
+                  navigate('/login');
+                });
+              }}>
               <span style={{ paddingRight: 8 }}>ELIMINAR USUARIO</span>
               <DeleteIcon />
             </ButtonDelete>
