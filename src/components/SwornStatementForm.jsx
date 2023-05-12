@@ -41,7 +41,10 @@ const SwornStatementForm = () => {
 
     axios
       .post(`${publicUrl}swornStatement/`, resultForm, {
-        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          token: localStorage.getItem('token'),
+        },
       })
       .then((response) => {
         console.log(response);
