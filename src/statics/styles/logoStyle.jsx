@@ -7,7 +7,7 @@ const BoxImage = styled(Box)({
   marginBottom: '12vh',
 });
 
-const ImageLogo = styled(Box)({ width: '50%', height: '50%' });
+const ImageLogo = styled(Box)({ width: '80%', height: '80%' });
 
 export {
   BoxImage,

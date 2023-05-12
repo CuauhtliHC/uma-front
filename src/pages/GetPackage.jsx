@@ -38,6 +38,7 @@ const GetPackage = () => {
   const more = () => {
     setMaxPackage(maxPackage + 3);
   };
+  console.log(list);
 
   return (
     <>
@@ -64,9 +65,7 @@ const GetPackage = () => {
                 />
               );
             })}
-            {maxPackage < data.length && (
-              <MoreButton more={more} />
-            )}
+            {maxPackage < data.length && <MoreButton more={more} />}
           </>
         ) : null}
       </MainBox>

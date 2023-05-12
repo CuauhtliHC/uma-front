@@ -14,7 +14,7 @@ export default function ViewsDatePicker({
       <Stack>
         <InputDate
           MuiInputProps={{ className: 'customDatePickerInput' }}
-          minDate={dayjs().add(1, 'day').format('YYYY-MM-DD')}
+          minDate={dayjs().add(0, 'day').format('YYYY-MM-DD')}
           label={labelText}
           value={value}
           onChange={handleChange}

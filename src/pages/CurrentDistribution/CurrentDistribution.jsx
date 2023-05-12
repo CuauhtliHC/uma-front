@@ -6,6 +6,7 @@ import {
   BoxList,
   BoxTypography,
   ButtonFinish,
+  CancelledButton,
   FirstTypography,
   MainBoxDistribution,
   SecondBox,
@@ -15,6 +16,7 @@ import {
 import BackButton from '../../commons/buttons/BackButton.jsx';
 import { getOrderById } from '../../service/getOrderById.jsx';
 import { funcGetStatus } from '../../service/getPackageAdmin.jsx';
+import { finishOrder } from '../../service/getPackage.jsx';
 
 const CurrentDistribution = () => {
   const navigate = useNavigate();
@@ -24,6 +26,16 @@ const CurrentDistribution = () => {
   useEffect(() => {
     getOrderById(id, setOrderData);
   }, [id]);
+
+  const finishedPacket = () => {
+    finishOrder(id, 'finished');
+    navigate('/iniciar_jornada');
+  };
+
+  const cancelledPacket = () => {
+    finishOrder(id, 'inProgress');
+    navigate(0);
+  };
   return (
     <>
       <BackButton handleSubmit={() => navigate('/iniciar_jornada')} />
@@ -31,7 +43,9 @@ const CurrentDistribution = () => {
         <SecondBox>
           {order && (
             <>
-              <TitleDistribution variant="h1">Reparto {funcGetStatus(order)}</TitleDistribution>
+              <TitleDistribution variant="h1">
+                Reparto {funcGetStatus(order)}
+              </TitleDistribution>
               <GoogleMaps destination={order.Package.address} />
               <BoxList>
                 <BoxTypography>
@@ -50,7 +64,13 @@ const CurrentDistribution = () => {
             </>
           )}
           <BoxButton>
-            <ButtonFinish>Finalizar</ButtonFinish>
+            {order?.InProgressOrder.status !== 'IN_PROGRESS' ? (
+              <CancelledButton onClick={cancelledPacket}>
+                Llevando
+              </CancelledButton>
+            ) : (
+              <ButtonFinish onClick={finishedPacket}>Finalizar</ButtonFinish>
+            )}
           </BoxButton>
         </SecondBox>
       </MainBoxDistribution>
